@@ -301,3 +301,55 @@ Add an `image` field to the appropriate document schema in `src/sanity/schemas/<
 Extend the GROQ query in `src/lib/sanityQueries.ts` to select the asset URL. Refactor
 the consuming component to read from the Sanity URL with the existing /public/ path as
 fallback. Run `node scripts/migrate-ui-labels.mjs` if you've also added new labels.
+
+
+## Managing the gallery
+
+The Gallery is fully owner-editable through Sanity Studio — add new pieces, delete old ones,
+reorder, feature on the homepage, all without touching code or a developer.
+
+### Adding a new gallery piece
+
+1. Open Sanity Studio (sign in with your editor account).
+2. Click **Gallery pieces** in the sidebar.
+3. Click the **+ Create** button at the top of the list.
+4. Fill the fields:
+   - **Name** — title in EN + TH (e.g. "Royal Sapphire Floral Choker" / "สร้อยคอดอกไม้ไพลินรอยัล")
+   - **Description** — one or two sentences describing the piece, EN + TH
+   - **Alt text** — a short literal description for screen readers (e.g. "Sapphire-and-diamond choker on black velvet")
+   - **Image** — drag a file in or click **Upload**. Recommended ≥1600px wide for retina sharpness. JPG or PNG, no size limit.
+   - **Aspect** — square / portrait / wide (pick the natural shape of the photograph; controls how the tile is cropped on the gallery wall)
+   - **Categories** — pick one or more from the dropdown (Rings, Necklaces, Earrings, Rubies, Sapphires, Diamonds, Sets, Bridal). Add a new category first via the **Categories** sidebar entry if you need one.
+   - **Order** (optional) — a sort number, lower comes first. Leave empty to keep the existing order.
+   - **Featured on homepage** — toggle on if you want this piece to appear in the home page preview wall.
+5. Click **Publish** at the bottom of the page.
+6. Within 60 seconds, the new tile appears on **/gallery** on the live site. If it's set to featured, it also appears on **/**.
+
+### Deleting a gallery piece
+
+1. Open Sanity Studio → **Gallery pieces**.
+2. Click the piece you want to remove.
+3. Click the **⋮** menu in the top-right of the document.
+4. Select **Delete document** and confirm.
+5. Within 60 seconds the tile disappears from /gallery. Lightbox / preload won't try to load it — it cleanly drops from the layout.
+
+### Reordering gallery pieces
+
+Either: drag pieces in the Studio list to reorder (if drag-orderable is enabled),
+**or** open a piece and edit the **Order** field (lower number = earlier on the wall).
+Multiple pieces with the same order number fall back to creation date.
+
+### Featuring / unfeaturing on the homepage
+
+1. Open the piece in Studio.
+2. Toggle the **Featured on homepage** switch.
+3. Publish.
+4. Within 60s the homepage preview wall reflects the change.
+
+### Verified end-to-end (June 2026)
+
+The create / feature-toggle / reorder / delete loop was smoke-tested via the Sanity
+API with the editor token: a test piece was created (count went 26 → 27), the hero flag
+was toggled true/false, the order field was patched 9999 → 5 and read back, and the
+piece + its asset were deleted (count returned to 26). All four operations clean,
+no orphaned references, no broken layout.
