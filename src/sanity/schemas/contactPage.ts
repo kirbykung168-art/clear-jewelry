@@ -29,6 +29,20 @@ export default defineType({
       type: 'url',
       description: 'The full Google Maps embed URL (from Share → Embed a map). Leave empty to hide the map.',
     }),
+    defineField({
+      name: 'whatsappQr',
+      title: 'WhatsApp QR image',
+      type: 'image',
+      description: 'The QR code printed on the WhatsApp panel of /contact and /book. Upload a new PNG/JPG to replace.',
+      options: { hotspot: false },
+    }),
+    defineField({
+      name: 'lineQr',
+      title: 'LINE QR image (optional)',
+      type: 'image',
+      description: 'Optional custom LINE QR. If left empty, the site generates a QR from the LINE URL automatically.',
+      options: { hotspot: false },
+    }),
   ],
   preview: { prepare: () => ({ title: 'Contact page' }) },
 });

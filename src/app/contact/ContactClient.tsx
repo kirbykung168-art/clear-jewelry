@@ -1,54 +1,63 @@
 'use client';
 
+import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import Reveal from '@/components/Reveal';
 import OrnateDivider from '@/components/OrnateDivider';
+import GoldCornerFrame from '@/components/GoldCornerFrame';
+import SparkleField from '@/components/SparkleField';
+import MagneticButton from '@/components/MagneticButton';
 import LetterDropTitle from '@/components/LetterDropTitle';
 import CountUp from '@/components/CountUp';
+import WhisperLine from '@/components/WhisperLine';
 import { BRAND } from '@/lib/brand';
 import { useT, useLocale } from '@/components/LanguageProvider';
 
 const LINE_QR_SRC = `https://api.qrserver.com/v1/create-qr-code/?size=480x480&margin=2&data=${encodeURIComponent(BRAND.lineUrl)}`;
 
 /**
- * /book — Reach the atelier.
+ * Contact page.
  *
- * Replaces the previous in-page booking form. The owner prefers WhatsApp
- * as the primary contact channel, so this page is purely two contact
- * panels and a polite confirmation promise:
+ * Hierarchy (WhatsApp primary, LINE secondary):
+ *  - WhatsApp panel comes FIRST and visually leads (larger card, full
+ *    hairline gold border at brand opacity, soft drop shadow, larger QR,
+ *    eyebrow "PRIMARY CHANNEL · BY APPOINTMENT", filled-gold CTA).
+ *  - LINE panel comes SECOND, materially quieter (smaller QR, lighter
+ *    border, no drop shadow, eyebrow "ALSO ON LINE", ghost-outline CTA).
  *
- *   1. WhatsApp panel (PRIMARY)
- *      - Listed first, larger card, full hairline gold border, drop shadow,
- *        bigger QR (220/280), eyebrow "PRIMARY CHANNEL · BY APPOINTMENT",
- *        filled-gold CTA "Chat on WhatsApp".
- *   2. LINE panel (SECONDARY)
- *      - Listed second, smaller card, lighter border, no shadow, smaller
- *        QR (160/200), eyebrow "ALSO ON LINE", outline CTA "Add us on LINE".
- *
- * No form, no /api/book, no LINE_CHANNEL_ACCESS_TOKEN, no Google Sheets.
- * The page is read-only contact + a quiet promise of reply timing.
- *
- * Brand register stays Harry Winston / Graff editorial. Hierarchy is
- * carried by size + border weight + button fill contrast, not colour.
+ * Instagram removed at owner's request.
  */
-interface BookClientProps {
+interface ContactClientProps {
   waQrUrl?: string | null;
   lineQrUrl?: string | null;
+  cms?: {
+    headline?: { en?: string; th?: string; zh?: string } | null;
+    subhead?:  { en?: string; th?: string; zh?: string } | null;
+  } | null;
 }
 
-export default function BookClient({ waQrUrl, lineQrUrl }: BookClientProps = {}) {
+export default function ContactClient({ waQrUrl, lineQrUrl, cms }: ContactClientProps = {}) {
   const t = useT();
-  const { locale } = useLocale();
   const [waOpen, setWaOpen] = useState(false);
   const [lineOpen, setLineOpen] = useState(false);
+  const { locale } = useLocale();
   const yearsActive = new Date().getFullYear() - BRAND.establishedYear;
+  // Sanity wins; t() fallback. Empty string also falls back so a blank
+  // Studio field never leaves the page with empty text.
+  const sanityPick = (v?: { en?: string; th?: string; zh?: string } | null) => {
+    if (!v) return null;
+    const raw = (v as any)[locale] ?? v.en;
+    return raw && String(raw).trim() ? String(raw) : null;
+  };
+  const headline = sanityPick(cms?.headline);
+  const subhead  = sanityPick(cms?.subhead);
 
   return (
     <>
-      {/* INTRO */}
-      <section className="relative bg-ivory pt-32 lg:pt-44 pb-10 lg:pb-14 overflow-hidden">
+      {/* ============================== INTRO ============================== */}
+      <section className="relative bg-ivory pt-40 lg:pt-48 pb-16 overflow-hidden">
         <div
           className="absolute inset-0 opacity-25 pointer-events-none"
           style={{
@@ -59,14 +68,14 @@ export default function BookClient({ waQrUrl, lineQrUrl }: BookClientProps = {})
 
         <span
           aria-hidden
-          className="ghost-numeral right-[5vw] top-20"
-          style={{ fontSize: 'clamp(160px, 22vw, 380px)' }}
+          className="ghost-numeral right-[5vw] top-24"
+          style={{ fontSize: 'clamp(180px, 24vw, 420px)' }}
         >
-          B
+          A
         </span>
 
         <div className="relative mx-auto max-w-[1480px] px-6 lg:px-10">
-          <div className="flex items-center justify-between mb-10 lg:mb-12">
+          <div className="flex items-center justify-between mb-12">
             <span className="font-sans text-[10.5px] uppercase tracking-[0.42em] text-gold-deep">
               {t('maison.label')}
             </span>
@@ -76,30 +85,42 @@ export default function BookClient({ waQrUrl, lineQrUrl }: BookClientProps = {})
           </div>
 
           <Reveal>
-            <p className="eyebrow text-gold-deep" lang={locale}>
-              B &nbsp;·&nbsp; {t('book.page.eyebrow')}
-            </p>
+            <p className="eyebrow text-gold-deep">A &nbsp;·&nbsp; {t('con.eyebrow')}</p>
             <h1
               className="display leading-[0.98] mt-4 max-w-3xl"
-              style={{ fontSize: 'clamp(44px, 7.4vw, 132px)' }}
+              style={{ fontSize: 'clamp(48px, 8vw, 160px)' }}
               lang={locale}
             >
-              <LetterDropTitle text={t('book.page.title.l1')} />
-              <span className="display-italic text-gold"> {t('book.page.title.l2')}</span>
+              {headline ? (
+                <LetterDropTitle text={headline} />
+              ) : (
+                <>
+                  <LetterDropTitle text={t('con.title.l1')} />
+                  <span className="display-italic text-gold"> {t('con.title.l2')}</span>
+                </>
+              )}
             </h1>
           </Reveal>
 
-          <Reveal delay={0.18}>
-            <OrnateDivider className="mt-10 lg:mt-14" />
+          {subhead && (
+            <Reveal delay={0.12}>
+              <p className="font-sans text-[15px] tracking-[0.02em] text-charcoal/80 leading-[1.85] mt-8 max-w-[58ch]" lang={locale}>
+                {subhead}
+              </p>
+            </Reveal>
+          )}
+
+          <Reveal delay={0.2}>
+            <OrnateDivider className="mt-14" />
           </Reveal>
         </div>
       </section>
 
-      {/* CHANNELS */}
+      {/* ============================== CHANNELS (WhatsApp primary, LINE secondary) ============================== */}
       <section className="bg-ivory pb-24 lg:pb-32">
         <div className="mx-auto max-w-[1480px] px-6 lg:px-10">
           <div className="grid lg:grid-cols-[1.18fr_0.82fr] gap-8 lg:gap-12 items-start">
-            {/* WhatsApp — PRIMARY (first on mobile, left on desktop) */}
+            {/* WhatsApp — PRIMARY */}
             <Reveal>
               <WhatsAppPanel
                 onEnlarge={() => setWaOpen(true)}
@@ -112,7 +133,7 @@ export default function BookClient({ waQrUrl, lineQrUrl }: BookClientProps = {})
               />
             </Reveal>
 
-            {/* LINE — SECONDARY (second on mobile, right on desktop) */}
+            {/* LINE — SECONDARY */}
             <Reveal delay={0.12}>
               <LinePanel
                 onEnlarge={() => setLineOpen(true)}
@@ -126,17 +147,103 @@ export default function BookClient({ waQrUrl, lineQrUrl }: BookClientProps = {})
             </Reveal>
           </div>
 
+          {/* Quiet promise line */}
           <Reveal delay={0.22}>
-            <p className="mt-14 lg:mt-20 text-center font-sans italic text-[15px] lg:text-[16px] text-charcoal/70 tracking-[0.02em] max-w-[44ch] mx-auto leading-[1.8]" lang={locale}>
+            <p className="mt-14 lg:mt-20 text-center font-sans italic text-[14.5px] text-charcoal/70 tracking-[0.02em] max-w-[44ch] mx-auto">
               {t('book.page.lede')}
             </p>
+          </Reveal>
+
+          {/* Atelier card */}
+          <Reveal delay={0.12}>
+            <aside className="relative bg-charcoal text-ivory p-10 lg:p-14 overflow-hidden mt-16 lg:mt-24">
+              <div
+                className="absolute inset-0 opacity-35 pointer-events-none"
+                style={{
+                  background:
+                    'radial-gradient(600px 500px at 100% 0%, rgba(194,161,77,0.30) 0%, rgba(194,161,77,0.06) 40%, transparent 75%)',
+                }}
+              />
+              <GoldCornerFrame inset={14} size={28} thickness={1} color="rgba(216,190,126,0.55)" />
+              <SparkleField count={5} tone="gold" />
+
+              <div className="relative grid lg:grid-cols-[1.4fr_1fr] gap-8 lg:gap-16 items-start">
+                <div>
+                  <p className="eyebrow text-gold-light">III &nbsp;·&nbsp; {t('foot.atelier')}</p>
+                  <h2
+                    className="display leading-tight mt-3"
+                    style={{ fontSize: 'clamp(28px, 3.6vw, 48px)' }}
+                  >
+                    {BRAND.addressLines[0]}
+                  </h2>
+                  <p className="font-sans text-[14.5px] tracking-[0.02em] text-ivory/90 leading-relaxed mt-3">
+                    {BRAND.addressLines[1]}
+                    <br />
+                    {BRAND.addressLines[2]}
+                  </p>
+                </div>
+                <dl className="space-y-5 text-[13.5px] tracking-[0.02em]">
+                  <div>
+                    <dt className="eyebrow text-gold-light/85">{t('foot.hours')}</dt>
+                    <dd className="mt-1 text-ivory/95">{t('tag.day')}</dd>
+                  </div>
+                  <div>
+                    <dt className="eyebrow text-gold-light/85">BTS</dt>
+                    <dd className="mt-1 text-ivory/95">{t('transit')}</dd>
+                  </div>
+                  <div className="pt-2">
+                    <MagneticButton
+                      href={BRAND.whatsappUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="btn btn-light"
+                    >
+                      {t('wa.primary.cta')} <span className="btn-arrow">→</span>
+                    </MagneticButton>
+                  </div>
+                </dl>
+              </div>
+            </aside>
           </Reveal>
         </div>
       </section>
 
+      {/* ============================== MAP ============================== */}
+      <section className="bg-charcoal relative">
+        <div className="relative w-full aspect-[16/8] md:aspect-[21/9]">
+          <iframe
+            title="Gaysorn Village map"
+            src={BRAND.googleMapEmbedUrl}
+            className="absolute inset-0 w-full h-full grayscale-[0.4] contrast-[1.05] brightness-95"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
+          <GoldCornerFrame inset={28} size={36} thickness={1} color="rgba(216,190,126,0.7)" />
+        </div>
+
+        <div className="bg-charcoal text-ivory border-t border-[var(--rule-invert)]">
+          <div className="mx-auto max-w-[1480px] px-6 lg:px-10 py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <p className="museum-label text-gold-light">{t('foot.atelier')}</p>
+              <p className="display text-[20px] leading-snug mt-2">{BRAND.addressLines[0]}</p>
+            </div>
+            <p className="font-sans text-[11px] tracking-[0.28em] uppercase text-ivory/65" lang={locale}>
+              {t('tag.day')} &nbsp;·&nbsp; {t('transit')}
+            </p>
+          </div>
+          <div className="text-center pb-8">
+            <WhisperLine tone="dark">
+              {t('misc.reply')}
+            </WhisperLine>
+          </div>
+        </div>
+      </section>
+
+      {/* QR enlargement modals */}
       {waOpen && typeof document !== 'undefined' && createPortal(
         <QrModal
-          src={BRAND.whatsappQrPath}
+          src={waQrUrl || BRAND.whatsappQrPath}
           isLocal
           eyebrow={t('wa.eyebrow')}
           scanLabel={t('wa.scan')}
@@ -149,7 +256,7 @@ export default function BookClient({ waQrUrl, lineQrUrl }: BookClientProps = {})
       )}
       {lineOpen && typeof document !== 'undefined' && createPortal(
         <QrModal
-          src={LINE_QR_SRC}
+          src={lineQrUrl || LINE_QR_SRC}
           isLocal={false}
           eyebrow="LINE"
           scanLabel={t('line.secondary.body')}
@@ -164,7 +271,9 @@ export default function BookClient({ waQrUrl, lineQrUrl }: BookClientProps = {})
   );
 }
 
-/* WhatsApp — PRIMARY */
+/* ─────────────────────────────────────────────────────────────────
+ *  WhatsApp panel — PRIMARY treatment
+ * ───────────────────────────────────────────────────────────────── */
 function WhatsAppPanel({
   onEnlarge,
   locale,
@@ -192,6 +301,7 @@ function WhatsAppPanel({
         boxShadow: '0 14px 44px -18px rgba(20, 16, 12, 0.30), 0 4px 18px rgba(20, 16, 12, 0.08)',
       }}
     >
+      {/* corner ornaments */}
       <span aria-hidden className="absolute pointer-events-none" style={{ top: 12, left: 12, width: 26, height: 26, borderTop: '1px solid var(--gold)', borderLeft: '1px solid var(--gold)' }} />
       <span aria-hidden className="absolute pointer-events-none" style={{ top: 12, right: 12, width: 26, height: 26, borderTop: '1px solid var(--gold)', borderRight: '1px solid var(--gold)' }} />
       <span aria-hidden className="absolute pointer-events-none" style={{ bottom: 12, left: 12, width: 26, height: 26, borderBottom: '1px solid var(--gold)', borderLeft: '1px solid var(--gold)' }} />
@@ -201,7 +311,7 @@ function WhatsAppPanel({
         type="button"
         onClick={onEnlarge}
         aria-label={t('wa.enlarge')}
-        className="block bg-ivory p-5 transition-transform duration-500 hover:scale-[1.02] mx-auto lg:mx-0"
+        className="block bg-ivory p-5 transition-transform duration-500 hover:scale-[1.02]"
         style={{ boxShadow: '0 2px 14px rgba(20,16,12,0.08)' }}
       >
         <Image
@@ -213,13 +323,13 @@ function WhatsAppPanel({
         />
       </button>
 
-      <div className="text-charcoal text-center lg:text-left">
+      <div className="text-charcoal">
         <p className="eyebrow text-gold-deep" lang={locale}>{eyebrow}</p>
         <p className="display-italic mt-4 text-charcoal leading-tight" style={{ fontSize: 'clamp(28px, 3.2vw, 40px)' }} lang={locale}>
           {title}
         </p>
-        <hr className="border-0 h-px bg-gold w-20 mt-6 mx-auto lg:mx-0" />
-        <p className="mt-6 font-sans text-[14.5px] tracking-[0.02em] text-charcoal/85 leading-[1.85] max-w-[36ch] mx-auto lg:mx-0" lang={locale}>
+        <hr className="border-0 h-px bg-gold w-20 mt-6" />
+        <p className="mt-6 font-sans text-[14.5px] tracking-[0.02em] text-charcoal/85 leading-[1.85] max-w-[36ch]" lang={locale}>
           {body}
         </p>
         <a
@@ -236,7 +346,9 @@ function WhatsAppPanel({
   );
 }
 
-/* LINE — SECONDARY */
+/* ─────────────────────────────────────────────────────────────────
+ *  LINE panel — SECONDARY treatment
+ * ───────────────────────────────────────────────────────────────── */
 function LinePanel({
   onEnlarge,
   locale,
@@ -282,7 +394,7 @@ function LinePanel({
           @{handle}
         </p>
         <hr className="border-0 h-px bg-charcoal/15 w-14 mt-4" />
-        <p className="mt-4 font-sans text-[13px] tracking-[0.02em] text-charcoal/70 leading-[1.75] max-w-[32ch]" lang={locale}>
+        <p className="mt-4 font-sans text-[12.5px] tracking-[0.02em] text-charcoal/70 leading-[1.75] max-w-[32ch]" lang={locale}>
           {body}
         </p>
         <a
@@ -299,7 +411,9 @@ function LinePanel({
   );
 }
 
-/* QR modal */
+/* ─────────────────────────────────────────────────────────────────
+ *  QR modal — generic
+ * ───────────────────────────────────────────────────────────────── */
 function QrModal({
   src,
   isLocal,
@@ -341,7 +455,7 @@ function QrModal({
           href={href}
           target="_blank"
           rel="noreferrer"
-          className="mt-5 inline-flex items-center justify-center gap-3 bg-charcoal text-ivory px-7 py-3 font-sans text-[12px] uppercase tracking-[0.32em] hover:bg-gold hover:text-charcoal transition-colors duration-500 min-h-[48px]"
+          className="mt-5 inline-flex items-center justify-center gap-3 bg-charcoal text-ivory px-7 py-3 font-sans text-[12px] uppercase tracking-[0.32em] hover:bg-gold hover:text-charcoal transition-colors duration-500"
         >
           {openLabel} →
         </a>

@@ -70,7 +70,8 @@ export const ABOUT_QUERY = `*[_id == "aboutPage"][0]{
   maisonTitle, maisonBody,
   philosophyTitle, philosophyBody,
   "bespokeSteps": bespokeSteps[]{ number, title, body },
-  portraitImage, portraitImageAlt
+  "portraitImage": portraitImage{ ..., asset->{ url, _id } },
+  portraitImageAlt
 }`;
 
 export const INFO_QUERY = `*[_id == "infoPage"][0]{
@@ -81,7 +82,9 @@ export const INFO_QUERY = `*[_id == "infoPage"][0]{
 export const CONTACT_QUERY = `*[_id == "contactPage"][0]{
   headline, subhead,
   "channels": channels[]{ label, value, href, secondary },
-  mapEmbedUrl
+  mapEmbedUrl,
+  "whatsappQr": whatsappQr.asset->{ url, _id },
+  "lineQr": lineQr.asset->{ url, _id }
 }`;
 
 /* ───────────── Helpers ───────────── */

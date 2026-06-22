@@ -5,6 +5,7 @@ import Reveal from '@/components/Reveal';
 import Wordmark from '@/components/Wordmark';
 import T from '@/components/T';
 import { BRAND } from '@/lib/brand';
+import { getAboutPage } from '@/lib/sanityAdapter';
 
 export const metadata: Metadata = {
   title: 'About',
@@ -19,7 +20,9 @@ const STEPS: { n: string; titleKey: string; bodyKey: string }[] = [
   { n: '04', titleKey: 'about.besp.s4.title', bodyKey: 'about.besp.s4.body' },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const cms = (await getAboutPage()) as any;
+  const portraitUrl = cms?.portraitImage?.asset?.url ?? '/images/gallery/editorial-sapphire-suite-white.jpg';
   return (
     <>
       {/* Hero — editorial */}
@@ -50,7 +53,7 @@ export default function AboutPage() {
           <Reveal>
             <div className="relative aspect-[4/5] overflow-hidden">
               <Image
-                src="/images/gallery/editorial-sapphire-suite-white.jpg"
+                src={portraitUrl}
                 alt="A signature royal blue sapphire suite from the CLEAR atelier — composed and shot for editorial."
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"

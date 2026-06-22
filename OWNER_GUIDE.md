@@ -245,3 +245,59 @@ Jewelry", "Three quiet ways") from a previous brand pass. After you
 re-run the migration script, the Sanity values match the code — you
 can safely empty the `PINNED` set if you want full Studio control over
 those keys too.
+
+
+## Where each piece of copy / image lives in Studio
+
+Studio is at `clear-jewelry.sanity.studio`. Sign in with your editor account.
+
+### Page heroes & long-form copy → page singletons
+
+| Page | Studio document | Editable fields |
+|------|-----------------|-----------------|
+| /  (Home)  | Homepage              | Hero image (desktop + mobile), hero alt, hero eyebrow / title / italic / lede, CTAs, signature title + body, story title + body + image, closing title + body |
+| /about     | About page            | Maison title + body, philosophy title + body, optional atelier portrait + alt, the 4 bespoke-process steps |
+| /info      | Info page             | Page title, description, the 4 information sections (eyebrow + title + body each) |
+| /contact   | Contact page          | Headline, subhead, contact channels (WhatsApp + LINE), Google Maps embed URL, WhatsApp QR image, optional LINE QR image |
+| Header / Footer | Site settings    | Tagline, opening hours, transit note, address, navigation links, footer note, social share image (og:image), trust signals |
+
+### Small chrome strings (buttons, eyebrows, aria-labels, modal labels) → UI Labels
+
+All short strings — navigation labels, button text, footer atelier/hours/contact labels,
+booking eyebrows, lightbox aria-labels, Directions section labels, 404 page copy — live
+in the **UI Labels** singleton. Search by key (e.g. `wa.primary.cta`, `info.directions.title`,
+`nf.body`), edit the EN + TH values, publish. Site picks up changes on the next page
+load (60s revalidation window).
+
+## Replacing images
+
+Every owner-facing image is a Sanity asset reference. To swap one:
+
+1. Open Studio → the relevant document.
+2. Click the image field (Hero image, WhatsApp QR, etc).
+3. Upload your new file (PNG / JPG / WEBP, no size limit).
+4. Click Publish.
+5. The live site reflects the change within 60 seconds.
+
+| Image | Studio document | Field name |
+|-------|-----------------|------------|
+| Homepage hero (desktop) | Homepage | Hero image |
+| Homepage hero (mobile)  | Homepage | Hero image — mobile (optional) |
+| Story photo (homepage)  | Homepage | Story image |
+| About atelier portrait  | About page | Optional atelier portrait |
+| WhatsApp QR (Contact + Book) | Contact page | WhatsApp QR image |
+| LINE QR (Contact + Book, optional) | Contact page | LINE QR image (optional) — leave empty to auto-generate from the LINE URL |
+| Social share image (og:image) | Site settings | Social share image |
+| Gallery pieces (each piece) | Gallery (each Piece document) | Image |
+
+Anything not in this list (the marquise glyph used in the wordmark, ornamental gold
+hairlines, the SVG icons in the close buttons, the auto-generated LINE QR) is rendered
+in code as live SVG or generated on the fly — there is no upload slot for them; ask
+the developer if you want them changed.
+
+### Adding new editable images later (developer)
+
+Add an `image` field to the appropriate document schema in `src/sanity/schemas/<doc>.ts`.
+Extend the GROQ query in `src/lib/sanityQueries.ts` to select the asset URL. Refactor
+the consuming component to read from the Sanity URL with the existing /public/ path as
+fallback. Run `node scripts/migrate-ui-labels.mjs` if you've also added new labels.
