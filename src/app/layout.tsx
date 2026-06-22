@@ -11,7 +11,7 @@ import ScrollProgress from '@/components/ScrollProgress';
 import MaisonWatermark from '@/components/MaisonWatermark';
 import AmbientTint from '@/components/AmbientTint';
 import { LanguageProvider } from '@/components/LanguageProvider';
-import { getUILabels } from '@/lib/sanityAdapter';
+import { getUILabels, getSiteSettings } from '@/lib/sanityAdapter';
 import T from '@/components/T';
 import { BRAND } from '@/lib/brand';
 import type { Locale } from '@/lib/i18n';
@@ -47,7 +47,13 @@ const notoThaiSans = Noto_Sans_Thai({
 
 const SITE_URL = 'https://clear-jewelry.vercel.app';
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  // Sanity-fed og:image (owner editable in Studio → Site settings → Social
+  // share image). Falls back to /public/images/hero/hero-main.jpg if the
+  // Sanity field is empty or the fetch fails.
+  const ss = (await getSiteSettings().catch(() => null)) as any;
+  const ogImageUrl: string = ss?.ogImage || '/images/hero/hero-main.jpg';
+  const base: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: `${BRAND.name} — ${BRAND.tagline}`,
@@ -108,6 +114,14 @@ export const metadata: Metadata = {
     },
   },
 };
+  if (base.openGraph && Array.isArray(base.openGraph.images)) {
+    base.openGraph.images = [{ ...(base.openGraph.images[0] as any), url: ogImageUrl }];
+  }
+  if (base.twitter && Array.isArray((base.twitter as any).images)) {
+    (base.twitter as any).images = [ogImageUrl];
+  }
+  return base;
+}
 
 /* Schema.org Organization (parent) — describes the company. */
 const ORGANIZATION_JSONLD = {
