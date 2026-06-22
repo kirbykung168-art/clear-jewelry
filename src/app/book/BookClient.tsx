@@ -254,6 +254,7 @@ function LinePanel({
   cta: string;
   qrUrl?: string | null;
 }) {
+  const t = useT();
   return (
     <div
       className="relative p-6 lg:p-8 grid grid-cols-[auto_1fr] gap-6 lg:gap-8 items-center bg-ivory"
@@ -319,6 +320,7 @@ function QrModal({
   onClose: () => void;
   locale: string;
 }) {
+  const t = useT();
   return (
     <div
       onClick={onClose}
