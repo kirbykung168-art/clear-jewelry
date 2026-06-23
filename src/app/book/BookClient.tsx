@@ -58,7 +58,7 @@ export default function BookClient({ waQrUrl, lineQrUrl }: BookClientProps = {})
         <div className="relative mx-auto max-w-[1480px] px-6 lg:px-10">
           <Reveal>
             <p className="eyebrow text-gold-deep" lang={locale}>
-              B &nbsp;·&nbsp; {t('book.page.eyebrow')}
+              {t('book.page.eyebrow')}
             </p>
             <h1
               className="display leading-[0.98] mt-4 max-w-3xl"

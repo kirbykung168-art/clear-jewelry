@@ -66,7 +66,7 @@ export default function ContactClient({ waQrUrl, lineQrUrl, cms }: ContactClient
 
         <div className="relative mx-auto max-w-[1480px] px-6 lg:px-10">
                     <Reveal>
-            <p className="eyebrow text-gold-deep">A &nbsp;·&nbsp; {t('con.eyebrow')}</p>
+            <p className="eyebrow text-gold-deep">{t('con.eyebrow')}</p>
             <h1
               className="display leading-[0.98] mt-4 max-w-3xl"
               style={{ fontSize: 'clamp(48px, 8vw, 160px)' }}
@@ -152,7 +152,7 @@ export default function ContactClient({ waQrUrl, lineQrUrl, cms }: ContactClient
 
               <div className="relative grid lg:grid-cols-[1.4fr_1fr] gap-8 lg:gap-16 items-start">
                 <div>
-                  <p className="eyebrow text-gold-light">III &nbsp;·&nbsp; {t('foot.atelier')}</p>
+                  <p className="eyebrow text-gold-light">{t('foot.atelier')}</p>
                   <h2
                     className="display leading-tight mt-3"
                     style={{ fontSize: 'clamp(28px, 3.6vw, 48px)' }}

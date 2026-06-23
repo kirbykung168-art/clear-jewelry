@@ -71,7 +71,7 @@ export default function InfoPageBody({ sections }: { sections: Section[] }) {
                 </span>
                 <header className="relative">
                   <p className="eyebrow text-gold-deep">
-                    {ACT_LABELS[i]} &nbsp;·&nbsp; {s.eyebrow[locale]}
+                    {s.eyebrow[locale]}
                   </p>
                   <h2
                     className="display leading-[1.05] mt-3"
@@ -133,7 +133,7 @@ export default function InfoPageBody({ sections }: { sections: Section[] }) {
             {/* Wordmark lockup removed — the Footer below already shows
                 the canonical CLEAR / JEWELRY brand mark; rendering one
                 in this CTA too read as 'the logo twice at the bottom.' */}
-            <p className="eyebrow text-gold-light">V &nbsp;·&nbsp; {t('foot.atelier')}</p>
+            <p className="eyebrow text-gold-light">{t('foot.atelier')}</p>
             <h2
               className="display leading-tight mt-6"
               style={{ fontSize: 'clamp(32px, 4.4vw, 64px)' }}
@@ -174,7 +174,7 @@ export default function InfoPageBody({ sections }: { sections: Section[] }) {
           <Reveal>
             <header className="text-center mb-10 lg:mb-14">
               <p className="eyebrow text-gold-deep" lang={locale}>
-                VI &nbsp;·&nbsp; {t('info.directions.eyebrow')}
+                {t('info.directions.eyebrow')}
               </p>
               <h2
                 className="display-italic leading-tight mt-4 text-charcoal"
