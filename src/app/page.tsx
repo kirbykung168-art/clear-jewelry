@@ -68,7 +68,7 @@ export default async function HomePage() {
               style={{ textShadow: '0 2px 24px rgba(0,0,0,0.55)' }}
             >
               <L value={cms.heroTitle} />
-              <span className="block display text-gold-light"><L value={cms.heroItalic} /></span>
+              <span className="block display text-gold-deep"><L value={cms.heroItalic} /></span>
             </h1>
           </Reveal>
           <Reveal y={20} duration={1} delay={0.75}>
