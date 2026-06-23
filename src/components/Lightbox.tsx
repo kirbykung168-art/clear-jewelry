@@ -236,7 +236,8 @@ export default function Lightbox({ item, onClose, onPrev, onNext, prevItem, next
             recreated on prev/next, re-running the SanityImg mount-time
             check and re-firing the entry animation. */}
         <div
-          className={`relative aspect-[4/5] lg:aspect-[3/4] bg-ivory overflow-hidden ${imageClass}`}
+          className={`relative aspect-[4/5] lg:aspect-[3/4] overflow-hidden ${imageClass}`}
+          style={{ background: 'var(--gallery-tile-bg)' }}
           key={`img-${item.id}`}
         >
           {(item.imageSource || (item.src && item.src.startsWith('http'))) ? (

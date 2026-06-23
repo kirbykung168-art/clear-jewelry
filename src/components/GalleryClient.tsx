@@ -91,7 +91,8 @@ export default function GalleryClient({ pieces, categories }: GalleryClientProps
                 <button
                   type="button"
                   onClick={() => setActiveIndex(0)}
-                  className="group relative block w-full aspect-square overflow-hidden bg-ivory"
+                  className="group relative block w-full aspect-square overflow-hidden"
+                  style={{ background: 'var(--gallery-tile-bg)' }}
                   aria-label={salonFlat.alt}
                 >
                   <RemoteOrLocalImage src={salon.src} imageSource={salon.imageSource} alt={salonFlat.alt} priority blurDataURL={salon.blurDataURL} sizes="(max-width: 1024px) 100vw, 56vw" />
@@ -225,11 +226,12 @@ function PieceCard({
         type="button"
         onClick={onClick}
         className={clsx(
-          'relative block w-full overflow-hidden bg-ivory text-left',
+          'relative block w-full overflow-hidden text-left',
           aspectClass,
           'transition-[transform,box-shadow] duration-700 ease-elegant',
           'shadow-[0_0_0_rgba(0,0,0,0)] lg:group-hover:-translate-y-[3px] group-hover:shadow-[0_18px_38px_-22px_rgba(21,19,15,0.45)]',
         )}
+        style={{ background: 'var(--gallery-tile-bg)' }}
         aria-label={flat.alt}
       >
         <RemoteOrLocalImage src={item.src} imageSource={item.imageSource} alt={flat.alt} priority={priority} blurDataURL={item.blurDataURL} sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 25vw" />
