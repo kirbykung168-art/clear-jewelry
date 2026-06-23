@@ -6,7 +6,6 @@ import { createPortal } from 'react-dom';
 import Reveal from '@/components/Reveal';
 import OrnateDivider from '@/components/OrnateDivider';
 import LetterDropTitle from '@/components/LetterDropTitle';
-import CountUp from '@/components/CountUp';
 import { BRAND } from '@/lib/brand';
 import { useT, useLocale } from '@/components/LanguageProvider';
 

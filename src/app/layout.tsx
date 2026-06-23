@@ -73,8 +73,9 @@ export async function generateMetadata(): Promise<Metadata> {
     // surface the alternates so search engines understand the page is offered
     // in EN / TH / ZH and serve the right variant per user locale.
     languages: {
+      // TH temporarily hidden from the UI (see src/lib/i18n.ts LOCALES); the
+      // hreflang TH alternate is muted to match. Re-enable once translations land.
       'en': '/',
-      'th': '/?lang=th',
       'x-default': '/',
     },
   },
@@ -84,7 +85,6 @@ export async function generateMetadata(): Promise<Metadata> {
       'An independent Thai high-jewellery house since 1993. Unheated Burmese rubies, royal blue sapphires, fancy diamonds.',
     type: 'website',
     locale: 'en_TH',
-    alternateLocale: ['th_TH'],
     siteName: BRAND.name,
     images: [{
       url: '/images/hero/hero-main.jpg',

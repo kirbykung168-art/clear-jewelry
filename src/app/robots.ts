@@ -8,8 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        // /book is a redirect target — don't index.
-        disallow: ['/book'],
       },
     ],
     sitemap: `${BASE}/sitemap.xml`,
