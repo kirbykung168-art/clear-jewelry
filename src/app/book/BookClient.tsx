@@ -67,7 +67,7 @@ export default function BookClient({ waQrUrl, lineQrUrl }: BookClientProps = {})
               lang={locale}
             >
               <LetterDropTitle text={t('book.page.title.l1')} />
-              <span className="display text-charcoal"> {t('book.page.title.l2')}</span>
+              <span className="display text-gold"> {t('book.page.title.l2')}</span>
             </h1>
           </Reveal>
 

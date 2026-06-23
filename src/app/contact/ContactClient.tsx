@@ -79,7 +79,7 @@ export default function ContactClient({ waQrUrl, lineQrUrl, cms }: ContactClient
               ) : (
                 <>
                   <LetterDropTitle text={t('con.title.l1')} />
-                  <span className="display text-charcoal"> {t('con.title.l2')}</span>
+                  <span className="display text-gold"> {t('con.title.l2')}</span>
                 </>
               )}
             </h1>

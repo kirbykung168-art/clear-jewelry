@@ -26,7 +26,7 @@ export default function NotFound() {
           lang={locale}
         >
           {t('nf.title.l1')}{' '}
-          <span className="display text-charcoal">{t('nf.title.l2')}</span>
+          <span className="display text-gold-deep">{t('nf.title.l2')}</span>
         </h1>
         <p className="font-sans italic text-[15px] lg:text-[16px] text-charcoal/70 mt-7 leading-[1.85] max-w-[44ch] mx-auto" lang={locale}>
           {t('nf.body')}

@@ -32,7 +32,7 @@ export default async function AboutPage() {
             <p className="eyebrow text-gold-deep"><T k="about.eyebrow" /></p>
             <h1 className="display text-[clamp(48px,8vw,144px)] leading-[0.96] mt-4 tracking-[-0.012em]">
               <T k="about.h1.l1" />
-              <span className="display text-charcoal"> <T k="about.h1.l2" /></span>
+              <span className="display text-gold"> <T k="about.h1.l2" /></span>
             </h1>
           </Reveal>
           <Reveal delay={0.15}>
@@ -68,7 +68,7 @@ export default async function AboutPage() {
             <p className="eyebrow text-gold-deep mb-4"><T k="about.phil.eyebrow" /></p>
             <h2 className="display text-[clamp(32px,4.4vw,56px)] leading-[1.06]">
               <T k="about.phil.h2.l1" />
-              <span className="display text-charcoal"> <T k="about.phil.h2.l2" /></span>
+              <span className="display text-gold"> <T k="about.phil.h2.l2" /></span>
             </h2>
             <p className="font-sans text-[15px] tracking-[0.02em] text-charcoal/80 leading-[1.85] mt-8">
               <T k="about.phil.body1" />
@@ -87,7 +87,7 @@ export default async function AboutPage() {
             <p className="eyebrow text-gold-light"><T k="about.besp.eyebrow" /></p>
             <h2 className="display text-[clamp(36px,5vw,72px)] leading-[1.04] mt-4">
               <T k="about.besp.h2.l1" />
-              <span className="display text-ivory"> <T k="about.besp.h2.l2" /></span>
+              <span className="display text-gold-light"> <T k="about.besp.h2.l2" /></span>
             </h2>
           </Reveal>
           <Reveal delay={0.15}>

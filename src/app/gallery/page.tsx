@@ -41,7 +41,7 @@ export default async function GalleryPage() {
                 style={{ fontSize: 'clamp(48px, 8.5vw, 148px)' }}
               >
                 <T k="gal.title.l1" />
-                <span className="block display text-charcoal mt-1"><T k="gal.title.l2" /></span>
+                <span className="block display text-gold mt-1"><T k="gal.title.l2" /></span>
               </h1>
             </div>
 

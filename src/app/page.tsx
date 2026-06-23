@@ -146,7 +146,7 @@ export default async function HomePage() {
               {!pickLocalized(cms.signatureTitle, 'en') && (
                 <>
                   <T k="home.sig.title.l1" />
-                  <span className="display text-charcoal"> <T k="home.sig.title.l2" /></span>
+                  <span className="display text-gold"> <T k="home.sig.title.l2" /></span>
                 </>
               )}
             </h2>
@@ -179,7 +179,7 @@ export default async function HomePage() {
               {!pickLocalized(cms.storyTitle, 'en') && (
                 <>
                   <T k="home.story.title.l1" />
-                  <span className="display text-ivory"> <T k="home.story.title.l2" /></span>
+                  <span className="display text-gold-light"> <T k="home.story.title.l2" /></span>
                 </>
               )}
             </h2>
@@ -214,7 +214,7 @@ export default async function HomePage() {
               {!pickLocalized(cms.closingTitle, 'en') && (
                 <>
                   <T k="home.close.title.l1" />
-                  <span className="display text-charcoal"> <T k="home.close.title.l2" /></span>
+                  <span className="display text-gold"> <T k="home.close.title.l2" /></span>
                 </>
               )}
             </h2>

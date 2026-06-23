@@ -48,7 +48,7 @@ export default function InfoPageBody({ sections }: { sections: Section[] }) {
               lang={locale}
             >
               <LetterDropTitle text={t('inf.title.l1')} />
-              <span className="display text-charcoal"> {t('inf.title.l2')}</span>
+              <span className="display text-gold"> {t('inf.title.l2')}</span>
             </h1>
           </Reveal>
 
