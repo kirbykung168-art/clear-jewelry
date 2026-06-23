@@ -105,7 +105,7 @@ export default async function HomePage() {
                 </Link>
                 <Link
                   href={ctaSecondaryHref}
-                  className="font-sans text-[12.5px] uppercase tracking-[0.42em] text-ivory hover:text-gold-light transition-colors duration-500 underline underline-offset-[10px] decoration-gold-light/80 decoration-[1px] pt-2 sm:pt-0"
+                  className="inline-flex items-center justify-center min-h-[44px] py-3 sm:py-2 font-sans text-[12.5px] uppercase tracking-[0.42em] text-ivory hover:text-gold-light transition-colors duration-500 underline underline-offset-[10px] decoration-gold-light/80 decoration-[1px]"
                 >
                   <L value={cms.ctaSecondaryLabel} />
                 </Link>
@@ -200,7 +200,7 @@ export default async function HomePage() {
             <hr className="gold-rule mt-8" />
             <Link
               href="/about"
-              className="mt-10 inline-flex items-center gap-3 font-sans text-[12px] uppercase tracking-[0.28em] text-gold-light hover:text-ivory transition-colors duration-500"
+              className="mt-10 inline-flex items-center gap-3 font-sans text-[12px] uppercase tracking-[0.28em] text-gold-light hover:text-ivory transition-colors duration-500 py-3 min-h-[44px]"
             >
               <T k="home.story.cta" /> <span className="btn-arrow">→</span>
             </Link>

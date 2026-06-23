@@ -62,7 +62,7 @@ export default function GalleryClient({ pieces, categories }: GalleryClientProps
                   type="button"
                   onClick={() => { setFilter(tab.slug); setActiveIndex(null); }}
                   className={clsx(
-                    'relative px-4 lg:px-6 py-3 font-sans text-[11.5px] uppercase tracking-[0.38em] transition-colors duration-500 shrink-0 snap-start',
+                    'relative px-4 lg:px-6 py-3 min-h-[44px] inline-flex items-center font-sans text-[11.5px] uppercase tracking-[0.38em] transition-colors duration-500 shrink-0 snap-start',
                     active ? 'text-charcoal' : 'text-charcoal/55 hover:text-charcoal',
                   )}
                 >
@@ -123,7 +123,7 @@ export default function GalleryClient({ pieces, categories }: GalleryClientProps
                   <button
                     type="button"
                     onClick={() => setActiveIndex(0)}
-                    className="mt-10 inline-flex items-center gap-3 font-sans text-[11.5px] uppercase tracking-[0.34em] text-charcoal hover:text-gold-deep transition-colors duration-500 border-b border-charcoal/40 pb-1.5"
+                    className="mt-10 inline-flex items-center gap-3 font-sans text-[11.5px] uppercase tracking-[0.34em] text-charcoal hover:text-gold-deep transition-colors duration-500 border-b border-charcoal/40 pb-3 pt-3 min-h-[44px]"
                   >
                     {t('gal.salon.view')} <span aria-hidden>→</span>
                   </button>

@@ -6,6 +6,10 @@ import { useLocale } from './LanguageProvider';
 
 /**
  * Minimal three-letter language pill switcher. EN · TH · CN.
+ *
+ * Mobile: each pill is sized to a ≥44×44 tap target via min-h/min-w. The
+ * visual letter remains compact (10px tracking-[0.22em]); the touch zone
+ * extends invisibly so phone users don't mis-tap the wrong locale.
  */
 export default function LanguageToggle({
   variant = 'dark',
@@ -19,7 +23,7 @@ export default function LanguageToggle({
   return (
     <div
       className={clsx(
-        'inline-flex items-center gap-1 font-sans text-[10px] tracking-[0.22em] uppercase',
+        'inline-flex items-center font-sans text-[10px] tracking-[0.22em] uppercase',
         className,
       )}
       role="group"
@@ -32,7 +36,7 @@ export default function LanguageToggle({
           onClick={() => setLocale(l.id as Locale)}
           aria-pressed={l.id === locale}
           className={clsx(
-            'px-1.5 py-1 transition-colors duration-500',
+            'inline-flex items-center justify-center min-h-[44px] min-w-[44px] px-2 transition-colors duration-500',
             l.id === locale
               ? variant === 'light'
                 ? 'text-gold-light underline underline-offset-4 decoration-gold/60 decoration-[0.5px]'
@@ -42,9 +46,9 @@ export default function LanguageToggle({
               : 'text-charcoal/55 hover:text-charcoal',
           )}
         >
-          {l.short}
+          <span>{l.short}</span>
           {i < LOCALES.length - 1 && (
-            <span className={clsx('ml-2', variant === 'light' ? 'text-ivory/30' : 'text-charcoal/25')}>·</span>
+            <span aria-hidden className={clsx('ml-2 -mr-2', variant === 'light' ? 'text-ivory/30' : 'text-charcoal/25')}>·</span>
           )}
         </button>
       ))}

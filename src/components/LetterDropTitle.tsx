@@ -27,6 +27,12 @@ interface Props {
  *
  * Used as the signature h1 entrance across all pages so every route feels
  * like the same maison opening its doors.
+ *
+ * MOBILE WRAP: words are wrapped in their own `inline-block whitespace-nowrap`
+ * spans so they can break between words but never inside a word. The prior
+ * single-line implementation overflowed the viewport on /contact where the
+ * h1 title is five words long at clamp(48px) — the entire string was forced
+ * onto one line and clipped past the right edge.
  */
 export default function LetterDropTitle({
   text,
@@ -52,60 +58,68 @@ export default function LetterDropTitle({
   }, []);
 
   const effectiveStagger = stagger ?? (isMobile ? 0.06 : 0.11);
-  const letters = Array.from(text);
-  const lastDelay = delay + (letters.length - 1) * effectiveStagger;
+  const words = text.split(' ');
+  // global letter index across words so sparkle/drop timing reads continuously
+  let letterIdx = 0;
+  const letterCount = Array.from(text).filter((c) => c !== ' ').length;
+  const lastDelay = delay + Math.max(0, letterCount - 1) * effectiveStagger;
 
   return (
     <span
       aria-label={text}
-      className={`inline-block ${className}`}
+      className={`inline ${className}`}
       style={style}
       lang={lang}
     >
-      <span aria-hidden className="inline-block whitespace-nowrap">
-        {letters.map((ch, i) => {
-          const d = delay + i * effectiveStagger;
-          // Render explicit non-breaking space for spaces so the spacing holds
-          const display = ch === ' ' ? ' ' : ch;
-          return (
-            <span key={i} className="relative inline-block">
-              <motion.span
-                initial={
-                  prefersReduced
-                    ? false
-                    : { opacity: 0, y: '-0.55em', filter: 'blur(10px)' }
-                }
-                animate={{ opacity: 1, y: '0em', filter: 'blur(0px)' }}
-                transition={{ duration: 0.95, delay: d, ease: [0.22, 0.61, 0.36, 1] }}
-                className="inline-block"
-              >
-                {display}
-              </motion.span>
-              {!prefersReduced && ch !== ' ' && (
-                <motion.svg
-                  viewBox="0 0 24 24"
-                  aria-hidden
-                  className="absolute pointer-events-none"
-                  style={{
-                    top: '0.05em',
-                    right: '-0.05em',
-                    width: '0.18em',
-                    height: '0.18em',
-                  }}
-                  initial={{ opacity: 0, scale: 0.2, rotate: 0 }}
-                  animate={{ opacity: [0, 1, 0], scale: [0.2, 1, 0.35], rotate: 60 }}
-                  transition={{ duration: 0.8, delay: d + 0.78, ease: 'easeOut' }}
-                >
-                  <path
-                    d="M12 0 L13.5 9 L24 12 L13.5 15 L12 24 L10.5 15 L0 12 L10.5 9 Z"
-                    fill={sparkleColor}
-                  />
-                </motion.svg>
-              )}
-            </span>
-          );
-        })}
-      </span>
+      {words.map((word, wi) => {
+        const chars = Array.from(word);
+        return (
+          <span key={wi} aria-hidden className="inline-block whitespace-nowrap">
+            {chars.map((ch, ci) => {
+              const d = delay + letterIdx * effectiveStagger;
+              letterIdx += 1;
+              return (
+                <span key={ci} className="relative inline-block">
+                  <motion.span
+                    initial={
+                      prefersReduced
+                        ? false
+                        : { opacity: 0, y: '-0.55em', filter: 'blur(10px)' }
+                    }
+                    animate={{ opacity: 1, y: '0em', filter: 'blur(0px)' }}
+                    transition={{ duration: 0.95, delay: d, ease: [0.22, 0.61, 0.36, 1] }}
+                    className="inline-block"
+                  >
+                    {ch}
+                  </motion.span>
+                  {!prefersReduced && (
+                    <motion.svg
+                      viewBox="0 0 24 24"
+                      aria-hidden
+                      className="absolute pointer-events-none"
+                      style={{
+                        top: '0.05em',
+                        right: '-0.05em',
+                        width: '0.18em',
+                        height: '0.18em',
+                      }}
+                      initial={{ opacity: 0, scale: 0.2, rotate: 0 }}
+                      animate={{ opacity: [0, 1, 0], scale: [0.2, 1, 0.35], rotate: 60 }}
+                      transition={{ duration: 0.8, delay: d + 0.78, ease: 'easeOut' }}
+                    >
+                      <path
+                        d="M12 0 L13.5 9 L24 12 L13.5 15 L12 24 L10.5 15 L0 12 L10.5 9 Z"
+                        fill={sparkleColor}
+                      />
+                    </motion.svg>
+                  )}
+                </span>
+              );
+            })}
+            {wi < words.length - 1 && <span aria-hidden> </span>}
+          </span>
+        );
+      })}
       {accent && (
         <motion.span
           initial={prefersReduced ? false : { opacity: 0, y: 18 }}

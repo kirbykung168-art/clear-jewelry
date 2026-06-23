@@ -175,7 +175,7 @@ export default function InfoPageBody({ sections }: { sections: Section[] }) {
               </MagneticButton>
               <Link
                 href="/contact"
-                className="font-sans text-[12px] uppercase tracking-[0.28em] text-ivory/85 hover:text-gold-light transition-colors duration-500 underline underline-offset-8 decoration-gold/60 decoration-[0.5px] pt-4 sm:pt-0"
+                className="inline-flex items-center justify-center min-h-[44px] py-3 sm:py-2 font-sans text-[12px] uppercase tracking-[0.28em] text-ivory/85 hover:text-gold-light transition-colors duration-500 underline underline-offset-8 decoration-gold/60 decoration-[0.5px]"
               >
                 {t('cls.cta.contact')}
               </Link>
