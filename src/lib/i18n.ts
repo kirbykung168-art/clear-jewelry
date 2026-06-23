@@ -320,6 +320,7 @@ export const COPY: Record<string, Entry> = {
   'line.primary.title':     { en: '@clearjewelry', th: '@clearjewelry', zh: '@clearjewelry' },
   'line.primary.body':      { en: 'Scan the code or tap below to add us on LINE. We reply within one business day.', th: 'สแกนรหัสหรือแตะปุ่มด้านล่างเพื่อเพิ่มเพื่อนทาง LINE ยินดีตอบกลับภายในหนึ่งวันทำการ', zh: '扫描二维码或点击下方按钮添加我们的 LINE。一个工作日内回复。' },
   'line.primary.cta':       { en: 'Add us on LINE', th: 'เพิ่มเพื่อน LINE', zh: '在 LINE 加为好友' },
+  'cta.chat.line':          { en: 'Chat on LINE', th: 'แชทบน LINE', zh: '在 LINE 上联络' },
   /* SECONDARY channel — WhatsApp */
   'wa.secondary.eyebrow':   { en: 'Also on WhatsApp', th: 'หรือทาง WhatsApp', zh: '亦可使用 WhatsApp' },
   'wa.secondary.handle':    { en: 'WhatsApp', th: 'WhatsApp', zh: 'WhatsApp' },

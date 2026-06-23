@@ -172,12 +172,12 @@ export default function ContactClient({ waQrUrl, lineQrUrl, cms }: ContactClient
                   </div>
                   <div className="pt-2">
                     <MagneticButton
-                      href={BRAND.whatsappUrl}
+                      href={BRAND.lineUrl}
                       target="_blank"
                       rel="noreferrer"
                       className="btn btn-light"
                     >
-                      {t('wa.primary.cta')} <span className="btn-arrow">→</span>
+                      {t('cta.chat.line')} <span className="btn-arrow">→</span>
                     </MagneticButton>
                   </div>
                 </dl>
