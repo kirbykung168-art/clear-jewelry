@@ -38,7 +38,7 @@ export default function InfoPageBody({ sections }: { sections: Section[] }) {
         {/* enormous ghost folio letter */}
         <div className="relative mx-auto max-w-[1480px] px-6 lg:px-10">
                     <Reveal>
-            <p className="eyebrow text-gold-deep">A &nbsp;·&nbsp; {t('inf.eyebrow')}</p>
+            <p className="eyebrow text-gold-deep">{t('inf.eyebrow')}</p>
             <h1
               className="display leading-[0.98] mt-4 max-w-4xl"
               style={{ fontSize: 'clamp(48px, 8vw, 160px)' }}
