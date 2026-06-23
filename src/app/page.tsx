@@ -49,19 +49,13 @@ export default async function HomePage() {
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              'linear-gradient(180deg, rgba(10,9,8,0.62) 0%, rgba(10,9,8,0.18) 22%, rgba(10,9,8,0.10) 50%, rgba(10,9,8,0.48) 78%, rgba(10,9,8,0.78) 100%)',
+              'linear-gradient(180deg, rgba(10,9,8,0.70) 0%, rgba(10,9,8,0.42) 20%, rgba(10,9,8,0.38) 50%, rgba(10,9,8,0.55) 80%, rgba(10,9,8,0.82) 100%)',
           }}
         />
 
         <div className="relative z-10 text-ivory text-center px-6">
           <Reveal y={36} duration={1.4}>
-            <p
-              className="eyebrow text-gold-light mb-8"
-              style={{
-                // Triple-layer halo so gold reads cleanly against any hero photo
-                textShadow: '0 0 8px rgba(20,16,12,0.55), 0 0 16px rgba(20,16,12,0.40), 0 1px 2px rgba(20,16,12,0.65)',
-              }}
-            >
+            <p className="eyebrow text-gold-light mb-8">
               <L value={cms.heroEyebrow} />
             </p>
           </Reveal>
@@ -71,14 +65,7 @@ export default async function HomePage() {
               style={{ textShadow: '0 2px 24px rgba(0,0,0,0.55)' }}
             >
               <L value={cms.heroTitle} />
-              <span
-                className="block display text-gold-deep"
-                style={{
-                  textShadow: '0 0 10px rgba(20,16,12,0.55), 0 0 20px rgba(20,16,12,0.40), 0 2px 3px rgba(20,16,12,0.70)',
-                }}
-              >
-                <L value={cms.heroItalic} />
-              </span>
+              <span className="block display text-gold-deep"><L value={cms.heroItalic} /></span>
             </h1>
           </Reveal>
           <Reveal y={20} duration={1} delay={0.75}>
