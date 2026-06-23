@@ -634,22 +634,13 @@ html, body { overflow-x: clip; }
    Latin display elements (Wordmark "CLEAR", brand handles) opt out by
    carrying `lang="en"`. */
 
-/* Maison-chrome typography classes (eyebrow, museum-label) always reset. */
-.eyebrow:lang(th),
-:lang(th) .eyebrow,
-.museum-label:lang(th),
-:lang(th) .museum-label,
-.eyebrow-xl:lang(th),
-:lang(th) .eyebrow-xl {
-  letter-spacing: 0 !important;
-  text-transform: none !important;
-}
-
-/* Tailwind tracked + uppercased utilities applied to Thai content. Scoped to
-   the AND of both utility patterns so the brand wordmark — which uses inline
-   style letterSpacing, not a tracking-* class — keeps its design tracking. */
-[class*="tracking-["][class*="uppercase"]:lang(th),
-:lang(th) [class*="tracking-["][class*="uppercase"] {
+/* GLOBAL :lang(th) RESET. Combining marks shatter under any positive
+   letter-spacing, and Thai has no uppercase form. Every Thai element on
+   the page gets both reset. Strictly-Latin display chrome (the CLEAR /
+   JEWELRY wordmark, brand handles, station names) opts back in with
+   explicit `lang="en"` on its container span — that excludes it from
+   `:lang(th)` even when `<html lang="th">`. */
+:lang(th) {
   letter-spacing: 0 !important;
   text-transform: none !important;
 }

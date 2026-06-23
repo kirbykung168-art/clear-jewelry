@@ -101,7 +101,7 @@ export default function Wordmark({
       )}
 
       {!iconOnly && (
-        <span className="flex flex-col leading-[1]" style={{ rowGap: Math.max(2, s.glyph * 0.12) }}>
+        <span lang="en" className="flex flex-col leading-[1]" style={{ rowGap: Math.max(2, s.glyph * 0.12) }}>
           <span
             className={clsx('display', ink)}
             style={{
