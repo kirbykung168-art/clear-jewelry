@@ -198,6 +198,9 @@ function readLocaleCookie(): Locale {
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // Sanity-driven gallery tile background; falls back to default if absent.
+  const ssRoot = (await getSiteSettings().catch(() => null)) as any;
+  const galleryTileBg: string = ssRoot?.galleryTileBackground || '#FBF6EB';
   // Server-side fetch the Sanity-editable UI label dictionary.
   // Returns null when the doc doesn't exist yet — t() falls back to COPY.
   const uiLabels = await getUILabels();
