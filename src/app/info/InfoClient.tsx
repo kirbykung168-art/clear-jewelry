@@ -12,9 +12,16 @@ import WhisperLine from '@/components/WhisperLine';
 import { BRAND } from '@/lib/brand';
 import { useT, useLocale } from '@/components/LanguageProvider';
 
+type LocalizedString = { en: string; th: string; zh?: string };
+type Section = {
+  eyebrow: LocalizedString;
+  title:   LocalizedString;
+  body:    { en: string[]; th: string[]; zh?: string[] };
+};
+
 const ACT_LABELS = ['I', 'II', 'III', 'IV'];
 
-export default function InfoPageBody({ sections }: { sections: any[] }) {
+export default function InfoPageBody({ sections }: { sections: Section[] }) {
   const t = useT();
   const { locale } = useLocale();
   const yearsActive = new Date().getFullYear() - BRAND.establishedYear;
@@ -71,7 +78,7 @@ export default function InfoPageBody({ sections }: { sections: any[] }) {
       {/* ============================== 4 SECTIONS ============================== */}
       <section className="bg-ivory pb-32 lg:pb-40">
         <div className="mx-auto max-w-[1180px] px-6 lg:px-10 space-y-24 lg:space-y-32">
-          {sections.map((s, i) => (
+          {sections.map((s: Section, i: number) => (
             <Reveal key={i} delay={0.05 * i}>
               <article className="relative grid lg:grid-cols-[1fr_2fr] gap-8 lg:gap-16 items-start">
                 {/* ghost act numeral, wall-painted behind the column */}
@@ -95,7 +102,7 @@ export default function InfoPageBody({ sections }: { sections: any[] }) {
                   <hr className="gold-rule mt-6" />
                 </header>
                 <div className="relative space-y-5">
-                  {s.body[locale].map((para, j) => (
+                  {s.body[locale].map((para: string, j: number) => (
                     <p
                       key={j}
                       className={`font-sans text-[15px] tracking-[0.02em] text-charcoal/85 leading-[1.9] ${
