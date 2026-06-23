@@ -20,8 +20,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: npm
-      - run: npm ci
+      - run: npm install --no-audit --no-fund
       # Skip Sanity API calls during build by setting the dummy env var if
       # required; safe defaults are baked into the codebase via `||` fallbacks.
       - run: npm run build

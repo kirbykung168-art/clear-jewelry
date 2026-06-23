@@ -32,7 +32,7 @@ export const BRAND = {
   ],
   addressOneLine: 'Gaysorn Centre, 3rd Floor, Gaysorn Village, 999 Ploenchit Rd, Lumpini, Pathumwan, Bangkok',
   hours: '11:00 – 18:00 daily',
-  transitNote: 'BTS Chidlom · Direct connection to Gaysorn Village',
+  transitNote: '',
 
   // ---- Google Map embed for Gaysorn Village ----
   googleMapEmbedUrl:
