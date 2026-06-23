@@ -7,7 +7,6 @@ import SparkleField from '@/components/SparkleField';
 import MagneticButton from '@/components/MagneticButton';
 import Wordmark from '@/components/Wordmark';
 import LetterDropTitle from '@/components/LetterDropTitle';
-import CountUp from '@/components/CountUp';
 import WhisperLine from '@/components/WhisperLine';
 import { BRAND } from '@/lib/brand';
 import { useT, useLocale } from '@/components/LanguageProvider';
@@ -24,8 +23,6 @@ const ACT_LABELS = ['I', 'II', 'III', 'IV'];
 export default function InfoPageBody({ sections }: { sections: Section[] }) {
   const t = useT();
   const { locale } = useLocale();
-  const yearsActive = new Date().getFullYear() - BRAND.establishedYear;
-
   return (
     <>
       {/* ============================== INTRO ============================== */}
@@ -214,7 +211,7 @@ export default function InfoPageBody({ sections }: { sections: Section[] }) {
                     fully interactive (pan / zoom / Streetview link). */}
                 <iframe
                   title="Gaysorn Centre · Bangkok"
-                  src="https://maps.google.com/maps?q=Clear+Jewelry,+Gaysorn+Centre,+999+Ploenchit+Rd,+Bangkok&z=17&output=embed"
+                  src="https://maps.app.goo.gl/vqqDxncmMUP83qYs6?g_st=ic"
                   className="block w-full h-[280px] lg:h-[420px]"
                   style={{ border: 0 }}
                   loading="lazy"
@@ -226,7 +223,7 @@ export default function InfoPageBody({ sections }: { sections: Section[] }) {
               {/* Below-embed link row */}
               <div className="mt-5 lg:mt-6 flex flex-col sm:flex-row gap-3 sm:gap-6 items-center justify-center">
                 <a
-                  href="https://www.google.com/maps/place/Clear+Jewelry/@13.7451316,100.5406037,17z/data=!3m1!4b1!4m6!3m5!1s0x30e29ed0068b414b:0x2a8a3c43b834b102!8m2!3d13.7451316!4d100.5406037!16s%2Fg%2F11c5wp36bw"
+                  href="https://maps.app.goo.gl/vqqDxncmMUP83qYs6?g_st=ic"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-5 py-3 min-h-[44px] font-sans text-[11px] uppercase tracking-[0.32em] text-charcoal hover:text-gold-deep transition-colors duration-500 border-b border-charcoal/40 hover:border-gold-deep"
@@ -235,7 +232,7 @@ export default function InfoPageBody({ sections }: { sections: Section[] }) {
                   {t('info.directions.openInMaps')} <span aria-hidden>↗</span>
                 </a>
                 <a
-                  href="https://www.google.com/maps/dir/?api=1&destination=Clear+Jewelry,+Gaysorn+Centre,+999+Ploenchit+Rd,+Bangkok&destination_place_id=ChIJS0GLBtCe4jARArE0uENMiio"
+                  href="https://maps.app.goo.gl/vqqDxncmMUP83qYs6?g_st=ic"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-5 py-3 min-h-[44px] font-sans text-[11px] uppercase tracking-[0.32em] text-charcoal hover:text-gold-deep transition-colors duration-500 border-b border-charcoal/40 hover:border-gold-deep"

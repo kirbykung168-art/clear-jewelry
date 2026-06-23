@@ -1,6 +1,5 @@
 import GalleryClient from '@/components/GalleryClient';
 import { getFullGallery } from '@/lib/sanityAdapter';
-import T from '@/components/T';
 
 export const revalidate = 60;
 
@@ -15,46 +14,8 @@ export default async function GalleryPage() {
 
   return (
     <>
-      {/* Editorial header */}
-      <section className="relative bg-ivory pt-40 lg:pt-48 pb-16 lg:pb-24 overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-30 pointer-events-none"
-          style={{
-            background:
-              'radial-gradient(900px 500px at 85% 25%, rgba(194,161,77,0.28) 0%, rgba(194,161,77,0.05) 35%, transparent 70%)',
-          }}
-        />
 
-        <div className="relative mx-auto max-w-[1480px] px-6 lg:px-10">
-          <div className="grid grid-cols-2 items-center mb-10 text-[10.5px] uppercase tracking-[0.48em] text-gold-deep">
-            <span><T k="maison.label" /></span>
-            <span className="text-right tabular-nums">Bangkok · since 1993</span>
-          </div>
-
-          <div className="grid lg:grid-cols-[1.2fr_1fr] gap-10 lg:gap-20 items-end">
-            <div>
-              <p className="font-sans text-[10.5px] uppercase tracking-[0.42em] text-gold-deep">
-                <T k="gal.eyebrow" />
-              </p>
-              <h1
-                className="display leading-[0.96] mt-4 max-w-[14ch] tracking-[-0.012em]"
-                style={{ fontSize: 'clamp(48px, 8.5vw, 148px)' }}
-              >
-                <T k="gal.title.l1" />
-                <span className="block display text-gold mt-1"><T k="gal.title.l2" /></span>
-              </h1>
-            </div>
-
-            <div>
-              <p className="font-sans text-[14.5px] tracking-[0.02em] text-charcoal/80 leading-[1.9] max-w-[42ch]">
-                <T k="gal.lede" />
-              </p>
-              <hr className="border-0 h-px bg-gold-light/60 w-24 mt-8" />
-            </div>
-          </div>
-        </div>
-      </section>
-
+      <div className="pt-28 lg:pt-36 bg-ivory" />
       <GalleryClient pieces={pieces} categories={categories} />
     </>
   );

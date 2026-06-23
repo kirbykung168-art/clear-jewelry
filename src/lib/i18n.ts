@@ -294,9 +294,9 @@ export const COPY: Record<string, Entry> = {
   'info.directions.eyebrow':       { en: 'Directions', th: 'เส้นทาง', zh: '路线' },
   'info.directions.title':         { en: 'How to find us', th: 'เส้นทางมายังเรา', zh: '抵达指引' },
   'info.directions.body':          {
-    en: '3rd floor, Gaysorn Centre, 999 Ploenchit Road, Pathum Wan, Bangkok 10330. Take BTS Chidlom — Exit 7 — skybridge to 3F.',
-    th: 'ชั้น 3 Gaysorn Centre 999 ถนนเพลินจิต ปทุมวัน กรุงเทพฯ 10330  ·  BTS ชิดลม — ทางออก 7 — สกายวอล์กถึงชั้น 3',
-    zh: 'Gaysorn Centre 3 楼，999 Ploenchit Road, Pathum Wan, Bangkok 10330。BTS Chidlom 站 7 号出口，沿天桥直达 3 楼。',
+    en: '3rd floor, Gaysorn Centre, 999 Ploenchit Road, Pathum Wan, Bangkok 10330.',
+    th: 'ชั้น 3 Gaysorn Centre 999 ถนนเพลินจิต ปทุมวัน กรุงเทพฯ 10330',
+    zh: 'Gaysorn Centre 3 楼，999 Ploenchit Road, Pathum Wan, Bangkok 10330。',
   },
   'info.directions.openInMaps':    { en: 'Open in Google Maps', th: 'เปิดใน Google Maps', zh: '在 Google Maps 中打开' },
   'info.directions.getDirections': { en: 'Get directions', th: 'ขอเส้นทาง', zh: '获取路线' },

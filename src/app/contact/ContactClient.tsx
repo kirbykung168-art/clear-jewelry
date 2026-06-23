@@ -10,7 +10,6 @@ import GoldCornerFrame from '@/components/GoldCornerFrame';
 import SparkleField from '@/components/SparkleField';
 import MagneticButton from '@/components/MagneticButton';
 import LetterDropTitle from '@/components/LetterDropTitle';
-import CountUp from '@/components/CountUp';
 import WhisperLine from '@/components/WhisperLine';
 import { BRAND } from '@/lib/brand';
 import { useT, useLocale } from '@/components/LanguageProvider';
@@ -43,7 +42,6 @@ export default function ContactClient({ waQrUrl, lineQrUrl, cms }: ContactClient
   const [waOpen, setWaOpen] = useState(false);
   const [lineOpen, setLineOpen] = useState(false);
   const { locale } = useLocale();
-  const yearsActive = new Date().getFullYear() - BRAND.establishedYear;
   // Sanity wins; t() fallback. Empty string also falls back so a blank
   // Studio field never leaves the page with empty text.
   const sanityPick = (v?: { en?: string; th?: string; zh?: string } | null) => {
