@@ -211,7 +211,7 @@ export default function InfoPageBody({ sections }: { sections: Section[] }) {
                     fully interactive (pan / zoom / Streetview link). */}
                 <iframe
                   title="Gaysorn Centre · Bangkok"
-                  src="https://maps.app.goo.gl/vqqDxncmMUP83qYs6?g_st=ic"
+                  src="https://maps.google.com/maps?q=Clear+Jewelry,+Gaysorn+Centre,+999+Ploenchit+Rd,+Bangkok&z=17&output=embed"
                   className="block w-full h-[280px] lg:h-[420px]"
                   style={{ border: 0 }}
                   loading="lazy"

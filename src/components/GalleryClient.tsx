@@ -91,7 +91,7 @@ export default function GalleryClient({ pieces, categories }: GalleryClientProps
                 <button
                   type="button"
                   onClick={() => setActiveIndex(0)}
-                  className="group relative block w-full aspect-square overflow-hidden bg-charcoal"
+                  className="group relative block w-full aspect-square overflow-hidden bg-ivory"
                   aria-label={salonFlat.alt}
                 >
                   <RemoteOrLocalImage src={salon.src} imageSource={salon.imageSource} alt={salonFlat.alt} priority blurDataURL={salon.blurDataURL} sizes="(max-width: 1024px) 100vw, 56vw" />

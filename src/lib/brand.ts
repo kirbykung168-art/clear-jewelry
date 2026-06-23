@@ -36,7 +36,7 @@ export const BRAND = {
 
   // ---- Google Map embed for Gaysorn Village ----
   googleMapEmbedUrl:
-    'https://maps.app.goo.gl/vqqDxncmMUP83qYs6?g_st=ic',
+    'https://maps.google.com/maps?q=Clear+Jewelry,+Gaysorn+Centre,+999+Ploenchit+Rd,+Bangkok&z=17&output=embed',
   googleMapsUrl:
     'https://maps.app.goo.gl/vqqDxncmMUP83qYs6?g_st=ic',
 
