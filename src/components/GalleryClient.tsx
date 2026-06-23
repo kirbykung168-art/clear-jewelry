@@ -47,11 +47,11 @@ export default function GalleryClient({ pieces, categories }: GalleryClientProps
       {/* Category tab strip */}
       <section className="bg-ivory border-b border-[var(--rule-soft)] sticky top-[82px] z-30">
         <div className="mx-auto max-w-[1480px] px-6 lg:px-10 py-6">
-          <div className="flex items-center justify-between gap-6 mb-4 text-[10.5px] uppercase tracking-[0.48em] text-gold-deep">
+          <div className="flex items-center gap-6 mb-4 text-[10.5px] uppercase tracking-[0.48em] text-gold-deep">
             <span>{t('gal.on_view')}</span>
-            <span className="tabular-nums">
-              {(filtered.length === 1 ? t('gal.count.work') : t('gal.count.works')).replace('{n}', String(filtered.length))}
-            </span>
+            {/* works-count span intentionally removed per owner request — Sanity
+                labels gal.count.work / gal.count.works stay editable in Studio
+                for revertability, just not rendered here. */}
           </div>
           <div className="flex items-center gap-2 overflow-x-auto scrollbar-none -mx-6 px-6 lg:-mx-1 lg:px-1 snap-x snap-mandatory">
             {tabs.map((tab) => {
