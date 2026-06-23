@@ -21,6 +21,7 @@ export const SITE_SETTINGS_QUERY = `*[_id == "siteSettings"][0]{
   addressLines, addressOneLine, hours, transitNote,
   googleMapEmbedUrl,
   googleMapsUrl,
+  galleryTileBackground,
   trustSignals,
   navLinks,
   footerNote,

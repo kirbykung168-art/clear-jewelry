@@ -53,6 +53,7 @@ export async function generateMetadata(): Promise<Metadata> {
   // Sanity field is empty or the fetch fails.
   const ss = (await getSiteSettings().catch(() => null)) as any;
   const ogImageUrl: string = ss?.ogImage || '/images/hero/hero-main.jpg';
+  const galleryTileBg: string = ss?.galleryTileBackground || '#FBF6EB';
   const base: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -208,6 +209,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html
       lang={initialLocale}
+      style={{ "--gallery-tile-bg": galleryTileBg } as React.CSSProperties}
       translate="no"
       className={`${cormorant.variable} ${jost.variable} ${notoThai.variable} ${notoThaiSans.variable} notranslate`}
     >

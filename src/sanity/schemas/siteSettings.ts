@@ -27,6 +27,7 @@ export default defineType({
     defineField({ name: 'transitNote',    title: 'Transit note',       type: 'localizedString' }),
     defineField({ name: 'googleMapEmbedUrl', title: 'Google Maps embed URL', type: 'url' }),
     defineField({ name: 'googleMapsUrl', title: 'Google Maps place URL (Open in Maps link)', type: 'url' }),
+    defineField({ name: 'galleryTileBackground', title: 'Gallery tile background colour', description: 'Hex colour applied behind transparent product PNGs (e.g. #FBF6EB).', type: 'string' }),
 
     /* Trust signals ---------------------------------------------- */
     defineField({
