@@ -621,3 +621,45 @@ html, body { overflow-x: clip; }
     max-width: 100vw;
   }
 }
+
+/* ============================== THAI SCRIPT OVERRIDES ==============================
+   Thai uses combining vowel/tone marks placed above, below, or beside a base
+   consonant. Latin-style letter-spacing visually rips those marks apart from
+   their base ("ล็อต" becomes "ล ็ อ ต" with the diacritic stranded). It also
+   has no uppercase form, so `text-transform: uppercase` is a no-op that only
+   signals design intent meant for Latin.
+
+   When the visitor's locale is Thai, <html lang="th"> cascades via
+   LanguageProvider, so `:lang(th)` matches every chrome element. Strictly-
+   Latin display elements (Wordmark "CLEAR", brand handles) opt out by
+   carrying `lang="en"`. */
+
+/* Maison-chrome typography classes (eyebrow, museum-label) always reset. */
+.eyebrow:lang(th),
+:lang(th) .eyebrow,
+.museum-label:lang(th),
+:lang(th) .museum-label,
+.eyebrow-xl:lang(th),
+:lang(th) .eyebrow-xl {
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+/* Tailwind tracked + uppercased utilities applied to Thai content. Scoped to
+   the AND of both utility patterns so the brand wordmark — which uses inline
+   style letterSpacing, not a tracking-* class — keeps its design tracking. */
+[class*="tracking-["][class*="uppercase"]:lang(th),
+:lang(th) [class*="tracking-["][class*="uppercase"] {
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+/* Thai text in tight chrome containers can still measure wider than a 390px
+   viewport. Allow break-anywhere as a last-resort safety net so a long Thai
+   string never punches through the right edge. */
+@media (max-width: 768px) {
+  :lang(th) {
+    overflow-wrap: anywhere;
+  }
+}
+
