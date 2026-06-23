@@ -643,6 +643,27 @@ html, body { overflow-x: clip; }
 :lang(th) {
   letter-spacing: 0 !important;
   text-transform: none !important;
+  /* Thai stacks vowel + tone marks above/below the base consonant. Standard
+     Latin line-height crashes marks into the line above. Open it up. */
+  line-height: 1.7;
+}
+
+/* Display headlines: tighter than body, but still looser than the Latin
+   default so the upper marks (ิ ี ึ ื ุ ู) don't kiss the descenders above. */
+:lang(th) h1,
+:lang(th) h2,
+:lang(th) h3,
+:lang(th) .display,
+:lang(th) .display-italic {
+  line-height: 1.3;
+}
+
+/* Eyebrow chrome: now that uppercase + tracking are reset, the line itself
+   reads as quiet sans body — give it the same Thai breathing room. */
+:lang(th) .eyebrow,
+:lang(th) .eyebrow-xl,
+:lang(th) .museum-label {
+  line-height: 1.5;
 }
 
 /* Thai text in tight chrome containers can still measure wider than a 390px
