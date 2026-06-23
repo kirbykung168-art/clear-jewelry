@@ -18,7 +18,6 @@ type Section = {
   body:    { en: string[]; th: string[]; zh?: string[] };
 };
 
-const ACT_LABELS = ['I', 'II', 'III', 'IV'];
 
 export default function InfoPageBody({ sections }: { sections: Section[] }) {
   const t = useT();
@@ -35,7 +34,6 @@ export default function InfoPageBody({ sections }: { sections: Section[] }) {
           }}
         />
 
-        {/* enormous ghost folio letter */}
         <div className="relative mx-auto max-w-[1480px] px-6 lg:px-10">
                     <Reveal>
             <p className="eyebrow text-gold-deep">{t('inf.eyebrow')}</p>
@@ -61,14 +59,11 @@ export default function InfoPageBody({ sections }: { sections: Section[] }) {
           {sections.map((s: Section, i: number) => (
             <Reveal key={i} delay={0.05 * i}>
               <article className="relative grid lg:grid-cols-[1fr_2fr] gap-8 lg:gap-16 items-start">
-                {/* ghost act numeral, wall-painted behind the column */}
-                <span
-                  aria-hidden
-                  className="ghost-numeral -left-2 -top-12 hidden lg:block"
-                  style={{ fontSize: 'clamp(120px, 14vw, 240px)' }}
-                >
-                  {ACT_LABELS[i]}
-                </span>
+                {/* Ghost background folio numeral (I/II/III/IV) intentionally
+                    removed — it competed visually with the eyebrow label and
+                    read as a bare bullet point. Eyebrows (EXPERTISE,
+                    AUTHENTICITY, etc.) now serve as the unambiguous section
+                    header. */}
                 <header className="relative">
                   <p className="eyebrow text-gold-deep">
                     {s.eyebrow[locale]}
