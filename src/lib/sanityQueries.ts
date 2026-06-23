@@ -20,6 +20,7 @@ export const SITE_SETTINGS_QUERY = `*[_id == "siteSettings"][0]{
   lineHandle, lineUrl,
   addressLines, addressOneLine, hours, transitNote,
   googleMapEmbedUrl,
+  googleMapsUrl,
   trustSignals,
   navLinks,
   footerNote,

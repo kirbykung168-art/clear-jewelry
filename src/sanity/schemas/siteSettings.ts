@@ -26,6 +26,7 @@ export default defineType({
     defineField({ name: 'hours',          title: 'Opening hours',      type: 'localizedString' }),
     defineField({ name: 'transitNote',    title: 'Transit note',       type: 'localizedString' }),
     defineField({ name: 'googleMapEmbedUrl', title: 'Google Maps embed URL', type: 'url' }),
+    defineField({ name: 'googleMapsUrl', title: 'Google Maps place URL (Open in Maps link)', type: 'url' }),
 
     /* Trust signals ---------------------------------------------- */
     defineField({
