@@ -353,3 +353,20 @@ API with the editor token: a test piece was created (count went 26 → 27), the 
 was toggled true/false, the order field was patched 9999 → 5 and read back, and the
 piece + its asset were deleted (count returned to 26). All four operations clean,
 no orphaned references, no broken layout.
+
+
+## Pre-push build check (developer)
+
+Vercel runs `npm run build` to produce the production deploy. If the build
+fails, Vercel keeps serving the previous deploy — so production silently
+falls behind the code on `main`. To prevent this, ALWAYS run the same
+build locally before pushing:
+
+```bash
+./scripts/preflight.sh    # runs `npm run build`; fails if any TS error
+```
+
+Or rely on the GitHub Actions workflow at `.github/workflows/build-check.yml`
+which runs the same build on every push to main and every PR. If the
+'Build check' job goes red, fix locally before merging — the deploy on
+production stays stale until the build passes.

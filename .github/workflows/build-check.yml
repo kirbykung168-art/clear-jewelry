@@ -1,0 +1,30 @@
+name: Build check
+
+# Runs `npm run build` (the same command Vercel runs) on every push to main
+# and every pull request. Catches TypeScript errors and other build failures
+# BEFORE Vercel deploys, so production never serves a stale build while a
+# new commit is broken upstream. If this job goes red, do NOT merge / push
+# further — fix the build first.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      # Skip Sanity API calls during build by setting the dummy env var if
+      # required; safe defaults are baked into the codebase via `||` fallbacks.
+      - run: npm run build
+        env:
+          NEXT_PUBLIC_SANITY_PROJECT_ID: '2dkw5oqu'
+          NEXT_PUBLIC_SANITY_DATASET: production

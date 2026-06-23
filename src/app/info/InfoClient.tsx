@@ -138,7 +138,7 @@ export default function InfoPageBody({ sections }: { sections: Section[] }) {
                   )}
                 </div>
               </article>
-              {i < SECTIONS.length - 1 && <OrnateDivider className="mt-16 opacity-70" />}
+              {i < sections.length - 1 && <OrnateDivider className="mt-16 opacity-70" />}
             </Reveal>
           ))}
         </div>
