@@ -68,16 +68,8 @@ export default async function HomePage() {
               style={{ textShadow: '0 2px 24px rgba(0,0,0,0.55)' }}
             >
               <L value={cms.heroTitle} />
-              <span className="block display-italic text-gold-light"><L value={cms.heroItalic} /></span>
+              <span className="block display text-gold-light"><L value={cms.heroItalic} /></span>
             </h1>
-          </Reveal>
-          <Reveal y={28} duration={1.2} delay={0.5}>
-            <p
-              className="mt-8 lg:mt-10 max-w-xl mx-auto font-sans text-[13.5px] lg:text-[14px] tracking-[0.04em] text-ivory leading-[1.75]"
-              style={{ textShadow: '0 1px 12px rgba(0,0,0,0.55)' }}
-            >
-              <L value={cms.heroLede} />
-            </p>
           </Reveal>
           <Reveal y={20} duration={1} delay={0.75}>
             <div className="mt-12 lg:mt-16 inline-block">
@@ -154,7 +146,7 @@ export default async function HomePage() {
               {!pickLocalized(cms.signatureTitle, 'en') && (
                 <>
                   <T k="home.sig.title.l1" />
-                  <span className="display-italic text-gold"> <T k="home.sig.title.l2" /></span>
+                  <span className="display text-charcoal"> <T k="home.sig.title.l2" /></span>
                 </>
               )}
             </h2>
@@ -187,7 +179,7 @@ export default async function HomePage() {
               {!pickLocalized(cms.storyTitle, 'en') && (
                 <>
                   <T k="home.story.title.l1" />
-                  <span className="display-italic text-gold-light"> <T k="home.story.title.l2" /></span>
+                  <span className="display text-ivory"> <T k="home.story.title.l2" /></span>
                 </>
               )}
             </h2>
@@ -222,7 +214,7 @@ export default async function HomePage() {
               {!pickLocalized(cms.closingTitle, 'en') && (
                 <>
                   <T k="home.close.title.l1" />
-                  <span className="display-italic text-gold"> <T k="home.close.title.l2" /></span>
+                  <span className="display text-charcoal"> <T k="home.close.title.l2" /></span>
                 </>
               )}
             </h2>

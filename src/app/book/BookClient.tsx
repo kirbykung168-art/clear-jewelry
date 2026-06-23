@@ -43,7 +43,6 @@ export default function BookClient({ waQrUrl, lineQrUrl }: BookClientProps = {})
   const { locale } = useLocale();
   const [waOpen, setWaOpen] = useState(false);
   const [lineOpen, setLineOpen] = useState(false);
-  const yearsActive = new Date().getFullYear() - BRAND.establishedYear;
 
   return (
     <>
@@ -57,24 +56,7 @@ export default function BookClient({ waQrUrl, lineQrUrl }: BookClientProps = {})
           }}
         />
 
-        <span
-          aria-hidden
-          className="ghost-numeral right-[5vw] top-20"
-          style={{ fontSize: 'clamp(160px, 22vw, 380px)' }}
-        >
-          B
-        </span>
-
         <div className="relative mx-auto max-w-[1480px] px-6 lg:px-10">
-          <div className="flex items-center justify-between mb-10 lg:mb-12">
-            <span className="font-sans text-[10.5px] uppercase tracking-[0.42em] text-gold-deep">
-              {t('maison.label')}
-            </span>
-            <span className="font-sans text-[10.5px] uppercase tracking-[0.42em] text-gold-deep tabular-nums">
-              Vol. <CountUp to={yearsActive} pad={2} /> · {BRAND.establishedYear}
-            </span>
-          </div>
-
           <Reveal>
             <p className="eyebrow text-gold-deep" lang={locale}>
               B &nbsp;·&nbsp; {t('book.page.eyebrow')}
@@ -85,7 +67,7 @@ export default function BookClient({ waQrUrl, lineQrUrl }: BookClientProps = {})
               lang={locale}
             >
               <LetterDropTitle text={t('book.page.title.l1')} />
-              <span className="display-italic text-gold"> {t('book.page.title.l2')}</span>
+              <span className="display text-charcoal"> {t('book.page.title.l2')}</span>
             </h1>
           </Reveal>
 
@@ -99,29 +81,31 @@ export default function BookClient({ waQrUrl, lineQrUrl }: BookClientProps = {})
       <section className="bg-ivory pb-24 lg:pb-32">
         <div className="mx-auto max-w-[1480px] px-6 lg:px-10">
           <div className="grid lg:grid-cols-[1.18fr_0.82fr] gap-8 lg:gap-12 items-start">
-            {/* WhatsApp — PRIMARY (first on mobile, left on desktop) */}
+            {/* LINE — PRIMARY (first on mobile, left on desktop) */}
             <Reveal>
-              <WhatsAppPanel
-                onEnlarge={() => setWaOpen(true)}
+              <PrimaryChannelPanel
+                onEnlarge={() => setLineOpen(true)}
                 locale={locale}
-                eyebrow={t('wa.primary.eyebrow')}
-                title={t('wa.name')}
-                body={t('wa.primary.body')}
-                cta={t('wa.primary.cta')}
-                qrUrl={waQrUrl}
+                eyebrow={t('line.primary.eyebrow')}
+                title={t('line.primary.title')}
+                body={t('line.primary.body')}
+                cta={t('line.primary.cta')}
+                qrUrl={lineQrUrl}
+                channel="line"
               />
             </Reveal>
 
-            {/* LINE — SECONDARY (second on mobile, right on desktop) */}
+            {/* WhatsApp — SECONDARY (second on mobile, right on desktop) */}
             <Reveal delay={0.12}>
-              <LinePanel
-                onEnlarge={() => setLineOpen(true)}
+              <SecondaryChannelPanel
+                onEnlarge={() => setWaOpen(true)}
                 locale={locale}
-                eyebrow={t('line.secondary.eyebrow')}
-                handle={BRAND.lineHandle}
-                body={t('line.secondary.body')}
-                cta={t('line.secondary.cta')}
-                qrUrl={lineQrUrl}
+                eyebrow={t('wa.secondary.eyebrow')}
+                handle={t('wa.secondary.handle')}
+                body={t('wa.secondary.body')}
+                cta={t('wa.secondary.cta')}
+                qrUrl={waQrUrl}
+                channel="whatsapp"
               />
             </Reveal>
           </div>
@@ -164,8 +148,10 @@ export default function BookClient({ waQrUrl, lineQrUrl }: BookClientProps = {})
   );
 }
 
-/* WhatsApp — PRIMARY */
-function WhatsAppPanel({
+/* PRIMARY channel panel — channel-agnostic. Per item #9: LINE is now the
+   primary, WhatsApp the secondary. Pass channel="line" or "whatsapp" so the
+   right href + QR fallback are wired up. */
+function PrimaryChannelPanel({
   onEnlarge,
   locale,
   eyebrow,
@@ -173,6 +159,7 @@ function WhatsAppPanel({
   body,
   cta,
   qrUrl,
+  channel,
 }: {
   onEnlarge: () => void;
   locale: string;
@@ -181,8 +168,12 @@ function WhatsAppPanel({
   body: string;
   cta: string;
   qrUrl?: string | null;
+  channel: 'line' | 'whatsapp';
 }) {
   const t = useT();
+  const href = channel === 'line' ? BRAND.lineUrl : BRAND.whatsappUrl;
+  const fallbackQr = channel === 'line' ? LINE_QR_SRC : BRAND.whatsappQrPath;
+  const channelLabel = channel === 'line' ? 'LINE' : 'WhatsApp';
   return (
     <div
       className="relative p-8 lg:p-12 grid lg:grid-cols-[auto_1fr] gap-8 lg:gap-12 items-center"
@@ -197,25 +188,32 @@ function WhatsAppPanel({
       <span aria-hidden className="absolute pointer-events-none" style={{ bottom: 12, left: 12, width: 26, height: 26, borderBottom: '1px solid var(--gold)', borderLeft: '1px solid var(--gold)' }} />
       <span aria-hidden className="absolute pointer-events-none" style={{ bottom: 12, right: 12, width: 26, height: 26, borderBottom: '1px solid var(--gold)', borderRight: '1px solid var(--gold)' }} />
 
-      <button
-        type="button"
-        onClick={onEnlarge}
-        aria-label={t('wa.enlarge')}
-        className="block bg-ivory p-5 transition-transform duration-500 hover:scale-[1.02] mx-auto lg:mx-0"
-        style={{ boxShadow: '0 2px 14px rgba(20,16,12,0.08)' }}
-      >
-        <Image
-          src={qrUrl || BRAND.whatsappQrPath}
-          alt={t('wa.eyebrow') + ' QR'}
-          width={280}
-          height={280}
-          className="block w-[220px] h-[220px] lg:w-[280px] lg:h-[280px]"
-        />
-      </button>
+      <div className="flex flex-col items-center lg:items-start">
+        {/* Prominent channel eyebrow above the QR per item #10 */}
+        <p className="font-sans text-[12px] uppercase tracking-[0.42em] text-gold-deep mb-4">
+          {channelLabel}
+        </p>
+        <button
+          type="button"
+          onClick={onEnlarge}
+          aria-label={t('aria.tapToEnlarge')}
+          className="block bg-ivory p-5 transition-transform duration-500 hover:scale-[1.02] mx-auto lg:mx-0"
+          style={{ boxShadow: '0 2px 14px rgba(20,16,12,0.08)' }}
+        >
+          <Image
+            src={qrUrl || fallbackQr}
+            alt={`${channelLabel} QR`}
+            width={280}
+            height={280}
+            unoptimized={channel === 'line'}
+            className="block w-[220px] h-[220px] lg:w-[280px] lg:h-[280px] mx-auto"
+          />
+        </button>
+      </div>
 
       <div className="text-charcoal text-center lg:text-left">
         <p className="eyebrow text-gold-deep" lang={locale}>{eyebrow}</p>
-        <p className="display-italic mt-4 text-charcoal leading-tight" style={{ fontSize: 'clamp(28px, 3.2vw, 40px)' }} lang={locale}>
+        <p className="display mt-4 text-charcoal leading-tight" style={{ fontSize: 'clamp(28px, 3.2vw, 40px)' }} lang={locale}>
           {title}
         </p>
         <hr className="border-0 h-px bg-gold w-20 mt-6 mx-auto lg:mx-0" />
@@ -223,7 +221,7 @@ function WhatsAppPanel({
           {body}
         </p>
         <a
-          href={BRAND.whatsappUrl}
+          href={href}
           target="_blank"
           rel="noreferrer"
           className="mt-8 inline-flex items-center gap-3 px-8 py-4 font-sans text-[12px] uppercase tracking-[0.34em] transition-colors duration-500 min-h-[48px]"
@@ -236,8 +234,8 @@ function WhatsAppPanel({
   );
 }
 
-/* LINE — SECONDARY */
-function LinePanel({
+/* SECONDARY channel panel — smaller, ghost-CTA companion to the primary. */
+function SecondaryChannelPanel({
   onEnlarge,
   locale,
   eyebrow,
@@ -245,6 +243,7 @@ function LinePanel({
   body,
   cta,
   qrUrl,
+  channel,
 }: {
   onEnlarge: () => void;
   locale: string;
@@ -253,41 +252,51 @@ function LinePanel({
   body: string;
   cta: string;
   qrUrl?: string | null;
+  channel: 'line' | 'whatsapp';
 }) {
   const t = useT();
+  const href = channel === 'line' ? BRAND.lineUrl : BRAND.whatsappUrl;
+  const fallbackQr = channel === 'line' ? LINE_QR_SRC : BRAND.whatsappQrPath;
+  const channelLabel = channel === 'line' ? 'LINE' : 'WHATSAPP';
   return (
     <div
-      className="relative p-6 lg:p-8 grid grid-cols-[auto_1fr] gap-6 lg:gap-8 items-center bg-ivory"
+      className="relative p-6 lg:p-8 grid lg:grid-cols-[auto_1fr] gap-6 lg:gap-8 items-center bg-ivory"
       style={{ border: '1px solid rgba(194, 161, 77, 0.22)' }}
     >
-      <button
-        type="button"
-        onClick={onEnlarge}
-        aria-label={t('aria.tapToEnlarge')}
-        className="block bg-ivory p-3 lg:p-4 transition-transform duration-500 hover:scale-[1.02]"
-        style={{ border: '1px solid rgba(194, 161, 77, 0.18)' }}
-      >
-        <Image
-          src={qrUrl || LINE_QR_SRC}
-          alt={`LINE QR · @${handle}`}
-          width={200}
-          height={200}
-          unoptimized
-          className="block w-[160px] h-[160px] lg:w-[200px] lg:h-[200px]"
-        />
-      </button>
-
-      <div className="text-charcoal">
-        <p className="eyebrow text-charcoal/55" lang={locale}>{eyebrow}</p>
-        <p className="display-italic mt-3 text-charcoal/85 leading-tight" style={{ fontSize: 'clamp(18px, 2vw, 24px)' }} lang={locale}>
-          @{handle}
+      <div className="flex flex-col items-center lg:items-start">
+        {/* Prominent channel eyebrow above the QR per item #10 */}
+        <p className="font-sans text-[11px] uppercase tracking-[0.42em] text-charcoal/60 mb-3">
+          {channelLabel}
         </p>
-        <hr className="border-0 h-px bg-charcoal/15 w-14 mt-4" />
-        <p className="mt-4 font-sans text-[13px] tracking-[0.02em] text-charcoal/70 leading-[1.75] max-w-[32ch]" lang={locale}>
+        <button
+          type="button"
+          onClick={onEnlarge}
+          aria-label={t('aria.tapToEnlarge')}
+          className="block bg-ivory p-3 lg:p-4 transition-transform duration-500 hover:scale-[1.02] mx-auto lg:mx-0"
+          style={{ border: '1px solid rgba(194, 161, 77, 0.18)' }}
+        >
+          <Image
+            src={qrUrl || fallbackQr}
+            alt={`${channelLabel} QR`}
+            width={200}
+            height={200}
+            unoptimized={channel === 'line'}
+            className="block w-[160px] h-[160px] lg:w-[200px] lg:h-[200px] mx-auto"
+          />
+        </button>
+      </div>
+
+      <div className="text-charcoal text-center lg:text-left">
+        <p className="eyebrow text-charcoal/55" lang={locale}>{eyebrow}</p>
+        <p className="display mt-3 text-charcoal/85 leading-tight" style={{ fontSize: 'clamp(18px, 2vw, 24px)' }} lang={locale}>
+          {handle}
+        </p>
+        <hr className="border-0 h-px bg-charcoal/15 w-14 mt-4 mx-auto lg:mx-0" />
+        <p className="mt-4 font-sans text-[13px] tracking-[0.02em] text-charcoal/70 leading-[1.75] max-w-[32ch] mx-auto lg:mx-0" lang={locale}>
           {body}
         </p>
         <a
-          href={BRAND.lineUrl}
+          href={href}
           target="_blank"
           rel="noreferrer"
           className="mt-6 inline-flex items-center gap-3 px-6 py-3 font-sans text-[11px] uppercase tracking-[0.32em] transition-colors duration-500 hover:bg-charcoal hover:text-ivory min-h-[48px]"

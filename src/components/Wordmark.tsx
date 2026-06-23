@@ -20,10 +20,14 @@ interface WordmarkProps {
  * legible over photographic hero backgrounds.
  */
 const SIZES = {
-  sm: { glyph: 30, clear: 24, sub: 10,   spacing: 0.36, gap: 12 },
-  md: { glyph: 42, clear: 32, sub: 11.5, spacing: 0.40, gap: 14 },
-  lg: { glyph: 64, clear: 52, sub: 14,   spacing: 0.44, gap: 20 },
-  xl: { glyph: 128, clear: 104, sub: 24, spacing: 0.5,  gap: 30 },
+  // Per item #4 (2026-06-23): tightened subtitle spacing across all sizes so
+  // "JEWELRY · Est. 1993" reads as one editorial mark, not airy phone-keypad
+  // letters. ~half the prior tracking — still spacious for a serif lockup,
+  // not stretched.
+  sm: { glyph: 30, clear: 24, sub: 10,   spacing: 0.18, gap: 12 },
+  md: { glyph: 42, clear: 32, sub: 11.5, spacing: 0.20, gap: 14 },
+  lg: { glyph: 64, clear: 52, sub: 14,   spacing: 0.22, gap: 20 },
+  xl: { glyph: 128, clear: 104, sub: 24, spacing: 0.24, gap: 30 },
 } as const;
 
 // Responsive overrides for the oversize `xl` hero wordmark. The fixed
@@ -38,7 +42,7 @@ const XL_RESPONSIVE = {
   // small screens to the original 0.5em from ~640px and up.
   subFontSize: 'clamp(11px, 2.4vw, 24px)',
   clearLetterSpacing: 'clamp(0.14em, 0.24em, 0.24em)',
-  subLetterSpacing: 'clamp(0.28em, 0.5em, 0.5em)',
+  subLetterSpacing: 'clamp(0.14em, 0.20em, 0.24em)',
 } as const;
 
 export default function Wordmark({

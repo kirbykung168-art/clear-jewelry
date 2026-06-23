@@ -84,12 +84,10 @@ export default function Footer() {
             label={t('foot.atelier')}
             primary={BRAND.addressLines[0]}
             secondary={`${BRAND.addressLines[1]} · ${BRAND.addressLines[2]}`}
-            tertiary={t('transit')}
           />
           <FooterChannel
             label={t('foot.hours')}
             primary={t('tag.day')}
-            secondary={t('transit')}
           />
           <FooterChannel
             label={t('foot.contact')}

@@ -39,25 +39,8 @@ export default function InfoPageBody({ sections }: { sections: Section[] }) {
         />
 
         {/* enormous ghost folio letter */}
-        <span
-          aria-hidden
-          className="ghost-numeral right-[4vw] top-24"
-          style={{ fontSize: 'clamp(180px, 24vw, 420px)' }}
-        >
-          A
-        </span>
-
         <div className="relative mx-auto max-w-[1480px] px-6 lg:px-10">
-          <div className="flex items-center justify-between mb-12">
-            <span className="font-sans text-[10.5px] uppercase tracking-[0.42em] text-gold-deep">
-              {t('maison.label')}
-            </span>
-            <span className="font-sans text-[10.5px] uppercase tracking-[0.42em] text-gold-deep tabular-nums">
-              Vol. <CountUp to={yearsActive} pad={2} /> · {BRAND.establishedYear}
-            </span>
-          </div>
-
-          <Reveal>
+                    <Reveal>
             <p className="eyebrow text-gold-deep">A &nbsp;·&nbsp; {t('inf.eyebrow')}</p>
             <h1
               className="display leading-[0.98] mt-4 max-w-4xl"
@@ -65,7 +48,7 @@ export default function InfoPageBody({ sections }: { sections: Section[] }) {
               lang={locale}
             >
               <LetterDropTitle text={t('inf.title.l1')} />
-              <span className="display-italic text-gold"> {t('inf.title.l2')}</span>
+              <span className="display text-charcoal"> {t('inf.title.l2')}</span>
             </h1>
           </Reveal>
 
@@ -115,7 +98,7 @@ export default function InfoPageBody({ sections }: { sections: Section[] }) {
 
                   {/* At-a-glance museum plaque for the Visiting section */}
                   {i === sections.length - 1 && (
-                    <dl className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 border-t border-b border-[var(--rule)] py-8">
+                    <dl className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6 border-t border-b border-[var(--rule)] py-8">
                       <div>
                         <dt className="eyebrow text-gold-deep/80">{t('foot.atelier')}</dt>
                         <dd className="display text-[19px] text-charcoal mt-2 leading-snug">
@@ -126,12 +109,6 @@ export default function InfoPageBody({ sections }: { sections: Section[] }) {
                         <dt className="eyebrow text-gold-deep/80">{t('foot.hours')}</dt>
                         <dd className="display text-[19px] text-charcoal mt-2 leading-snug" lang={locale}>
                           {t('tag.day')}
-                        </dd>
-                      </div>
-                      <div>
-                        <dt className="eyebrow text-gold-deep/80">BTS</dt>
-                        <dd className="display text-[19px] text-charcoal mt-2 leading-snug" lang={locale}>
-                          {t('transit')}
                         </dd>
                       </div>
                     </dl>
@@ -167,7 +144,7 @@ export default function InfoPageBody({ sections }: { sections: Section[] }) {
               {BRAND.addressLines[0]}
             </h2>
             <p className="font-sans text-[14px] tracking-[0.02em] text-ivory/85 mt-3">
-              {t('tag.day')} · {t('transit')}
+              {t('tag.day')}
             </p>
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <MagneticButton href="/book" className="btn btn-light">
@@ -237,7 +214,7 @@ export default function InfoPageBody({ sections }: { sections: Section[] }) {
                     fully interactive (pan / zoom / Streetview link). */}
                 <iframe
                   title="Gaysorn Centre · Bangkok"
-                  src="https://maps.google.com/maps?q=Gaysorn+Centre+Bangkok&z=16&output=embed"
+                  src="https://maps.google.com/maps?q=Clear+Jewelry+Gaysorn+Centre+Bangkok&z=17&output=embed"
                   className="block w-full h-[280px] lg:h-[420px]"
                   style={{ border: 0 }}
                   loading="lazy"
@@ -249,7 +226,7 @@ export default function InfoPageBody({ sections }: { sections: Section[] }) {
               {/* Below-embed link row */}
               <div className="mt-5 lg:mt-6 flex flex-col sm:flex-row gap-3 sm:gap-6 items-center justify-center">
                 <a
-                  href="https://www.google.com/maps?q=Gaysorn+Centre+Bangkok"
+                  href="https://www.google.com/maps/search/?api=1&query=Clear+Jewelry+Gaysorn+Centre+Bangkok"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-5 py-3 min-h-[44px] font-sans text-[11px] uppercase tracking-[0.32em] text-charcoal hover:text-gold-deep transition-colors duration-500 border-b border-charcoal/40 hover:border-gold-deep"
@@ -258,7 +235,7 @@ export default function InfoPageBody({ sections }: { sections: Section[] }) {
                   {t('info.directions.openInMaps')} <span aria-hidden>↗</span>
                 </a>
                 <a
-                  href="https://www.google.com/maps/dir/?api=1&destination=Gaysorn+Centre+Bangkok"
+                  href="https://www.google.com/maps/dir/?api=1&destination=Clear+Jewelry+Gaysorn+Centre+Bangkok"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-5 py-3 min-h-[44px] font-sans text-[11px] uppercase tracking-[0.32em] text-charcoal hover:text-gold-deep transition-colors duration-500 border-b border-charcoal/40 hover:border-gold-deep"

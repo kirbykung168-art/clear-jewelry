@@ -20,6 +20,10 @@ export default function LanguageToggle({
 }) {
   const { locale, setLocale } = useLocale();
 
+  // If we're shipping a single locale, the toggle would only confuse users —
+  // hide it entirely. Restored automatically once LOCALES has >1 entry.
+  if (LOCALES.length < 2) return null;
+
   return (
     <div
       className={clsx(

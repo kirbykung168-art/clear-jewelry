@@ -31,12 +31,12 @@ export const BRAND = {
     'Lumpini, Pathumwan, Bangkok',
   ],
   addressOneLine: 'Gaysorn Centre, 3rd Floor, Gaysorn Village, 999 Ploenchit Rd, Lumpini, Pathumwan, Bangkok',
-  hours: '11:00 – 19:00 daily',
+  hours: '11:00 – 18:00 daily',
   transitNote: 'BTS Chidlom · Direct connection to Gaysorn Village',
 
   // ---- Google Map embed for Gaysorn Village ----
   googleMapEmbedUrl:
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.1098!2d100.5424!3d13.7440!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29ed7d35db5b1%3A0xa6c0c6a3b6f4d3f4!2sGaysorn+Village!5e0!3m2!1sen!2sth!4v1700000000000',
+    'https://maps.google.com/maps?q=Clear+Jewelry+Gaysorn+Centre+Bangkok&z=17&output=embed',
 
   // ---- Trust signals ----
   trustSignals: [

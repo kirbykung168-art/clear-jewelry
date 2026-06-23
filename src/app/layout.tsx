@@ -174,7 +174,7 @@ const JEWELRY_STORE_JSONLD = {
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
       opens: '11:00',
-      closes: '19:00',
+      closes: '18:00',
     },
   ],
   sameAs: [BRAND.lineUrl],

@@ -35,7 +35,7 @@ export default function GalleryShowcaseClient({ items }: { items: LocalizedGalle
               onClick={() => setActiveIndex(i)}
               onMouseEnter={() => setHoverIndex(i)}
               onMouseLeave={() => setHoverIndex(null)}
-              className="group relative block w-full aspect-square overflow-hidden bg-charcoal text-left"
+              className="group relative block w-full aspect-square overflow-hidden bg-ivory text-left"
               aria-label={flat.alt}
             >
               {(item.imageSource || (item.src && item.src.startsWith("http"))) ? (

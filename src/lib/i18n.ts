@@ -20,7 +20,11 @@ export const DEFAULT_LOCALE: Locale = 'en';
 
 export const LOCALES: { id: Locale; short: string; label: string }[] = [
   { id: 'en', short: 'EN', label: 'English' },
-  { id: 'th', short: 'TH', label: 'ไทย' },
+  // TH temporarily hidden from the UI while translations are being rewritten.
+  // The infrastructure (COPY entries, :lang(th) CSS, LanguageProvider) stays
+  // in place; just stop offering the toggle. Restore by re-adding the entry
+  // below and republishing.
+  // { id: 'th', short: 'TH', label: 'ไทย' },
 ];
 
 /** A single translatable entry. `en` is required; th/zh fall back to en. */
@@ -41,15 +45,11 @@ export const COPY: Record<string, Entry> = {
     th: 'เมซงไฮจิวเวลรีอิสระจากประเทศไทย อัญมณีหายากแบบไม่ผ่านการเผา รังสรรค์ด้วยมือ และลงนาม CLEAR 1993 ครับ',
     zh: '独立的泰国高级珠宝世家。稀有未经加热的宝石，纯手工镶嵌，署名 CLEAR 1993。',
   },
-  'transit': {
-    en: 'BTS Chidlom · Direct connection to Gaysorn Village',
-    th: 'BTS ชิดลม · เชื่อมต่อตรงสู่เกษรวิลเลจ',
-    zh: 'BTS 奇隆站 · 直通 Gaysorn Village',
-  },
+  'transit':       { en: '', th: '', zh: '' },
   'tag.day': {
-    en: '11:00 – 19:00 Daily',
-    th: '11:00 – 19:00 ทุกวัน',
-    zh: '11:00 – 19:00 每日营业',
+    en: '11:00 – 18:00 Daily',
+    th: '11:00 – 18:00 ทุกวัน',
+    zh: '11:00 – 18:00 每日营业',
   },
   'maison.label': {
     en: 'Maison · Atelier',
@@ -178,7 +178,7 @@ export const COPY: Record<string, Entry> = {
 
   /* ───── CONTACT PAGE ───── */
   'con.eyebrow':   { en: 'In conversation', th: 'พูดคุยกับเรา', zh: '与我们对话' },
-  'con.title.l1':  { en: 'Two quiet ways', th: 'สองช่องทางเรียบง่าย', zh: '两种轻盈方式' },
+  'con.title.l1':  { en: 'Two ways', th: 'สองช่องทางเรียบง่าย', zh: '两种轻盈方式' },
   'con.title.l2':  { en: 'to reach us.', th: 'ที่จะติดต่อเรา', zh: '与我们联络。' },
 
   /* ───── GALLERY PAGE ───── */
@@ -315,6 +315,17 @@ export const COPY: Record<string, Entry> = {
   /* Universal aria-labels used in QR modals etc. */
   'aria.tapToEnlarge': { en: 'Tap to enlarge', th: 'แตะเพื่อขยาย', zh: '点击放大' },
   'aria.close':        { en: 'Close', th: 'ปิด', zh: '关闭' },
+  /* PRIMARY channel — LINE (per item #9, swapped from WhatsApp on 2026-06-23) */
+  'line.primary.eyebrow':   { en: 'Primary channel · By appointment', th: 'ช่องทางหลัก · เปิดให้บริการตามนัด', zh: '主要联络方式 · 预约制' },
+  'line.primary.title':     { en: '@clearjewelry', th: '@clearjewelry', zh: '@clearjewelry' },
+  'line.primary.body':      { en: 'Scan the code or tap below to add us on LINE. We reply within one business day.', th: 'สแกนรหัสหรือแตะปุ่มด้านล่างเพื่อเพิ่มเพื่อนทาง LINE ยินดีตอบกลับภายในหนึ่งวันทำการ', zh: '扫描二维码或点击下方按钮添加我们的 LINE。一个工作日内回复。' },
+  'line.primary.cta':       { en: 'Add us on LINE', th: 'เพิ่มเพื่อน LINE', zh: '在 LINE 加为好友' },
+  /* SECONDARY channel — WhatsApp */
+  'wa.secondary.eyebrow':   { en: 'Also on WhatsApp', th: 'หรือทาง WhatsApp', zh: '亦可使用 WhatsApp' },
+  'wa.secondary.handle':    { en: 'WhatsApp', th: 'WhatsApp', zh: 'WhatsApp' },
+  'wa.secondary.body':      { en: 'Prefer WhatsApp? Scan the code or tap below to start a chat.', th: 'สะดวก WhatsApp มากกว่า สแกนรหัสหรือแตะปุ่มด้านล่างเพื่อเริ่มแชท', zh: '若您更习惯使用 WhatsApp，请扫码或点按下方开始对话。' },
+  'wa.secondary.cta':       { en: 'Chat on WhatsApp', th: 'แชทบน WhatsApp', zh: '在 WhatsApp 上联络' },
+  /* Legacy keys kept for backwards compatibility (UI no longer reads them after the LINE/WhatsApp swap) */
   'wa.primary.eyebrow': { en: 'Primary channel · By appointment', th: 'ช่องทางหลัก · เปิดให้บริการตามนัด', zh: '主要联络方式 · 预约制' },
   'wa.primary.body':    { en: 'Scan the code or tap below to chat with us. We reply within one business day.', th: 'สแกนรหัสหรือแตะปุ่มด้านล่างเพื่อแชทกับเรา ยินดีตอบกลับภายในหนึ่งวันทำการ', zh: '扫描二维码或点击下方按钮与我们联络。一个工作日内回复。' },
   'wa.primary.cta':     { en: 'Chat on WhatsApp', th: 'แชทบน WhatsApp', zh: '在 WhatsApp 上联络' },
