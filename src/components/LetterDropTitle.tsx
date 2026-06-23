@@ -116,7 +116,7 @@ export default function LetterDropTitle({
                 </span>
               );
             })}
-            {wi < words.length - 1 && <span aria-hidden> </span>}
+            {wi < words.length - 1 && <span aria-hidden style={{ display: 'inline-block', width: '0.25em' }}>{'\u00A0'}</span>}
           </span>
         );
       })}
