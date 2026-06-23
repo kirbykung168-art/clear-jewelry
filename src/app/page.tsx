@@ -49,7 +49,7 @@ export default async function HomePage() {
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              'linear-gradient(180deg, rgba(10,9,8,0.70) 0%, rgba(10,9,8,0.42) 20%, rgba(10,9,8,0.38) 50%, rgba(10,9,8,0.55) 80%, rgba(10,9,8,0.82) 100%)',
+              'linear-gradient(180deg, rgba(10,9,8,0.62) 0%, rgba(10,9,8,0.18) 22%, rgba(10,9,8,0.10) 50%, rgba(10,9,8,0.48) 78%, rgba(10,9,8,0.78) 100%)',
           }}
         />
 
