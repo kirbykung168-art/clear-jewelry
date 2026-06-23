@@ -57,7 +57,10 @@ export default async function HomePage() {
           <Reveal y={36} duration={1.4}>
             <p
               className="eyebrow text-gold-light mb-8"
-              style={{ textShadow: '0 1px 14px rgba(0,0,0,0.65)' }}
+              style={{
+                // Triple-layer halo so gold reads cleanly against any hero photo
+                textShadow: '0 0 8px rgba(20,16,12,0.55), 0 0 16px rgba(20,16,12,0.40), 0 1px 2px rgba(20,16,12,0.65)',
+              }}
             >
               <L value={cms.heroEyebrow} />
             </p>
@@ -68,7 +71,14 @@ export default async function HomePage() {
               style={{ textShadow: '0 2px 24px rgba(0,0,0,0.55)' }}
             >
               <L value={cms.heroTitle} />
-              <span className="block display text-gold-deep"><L value={cms.heroItalic} /></span>
+              <span
+                className="block display text-gold-deep"
+                style={{
+                  textShadow: '0 0 10px rgba(20,16,12,0.55), 0 0 20px rgba(20,16,12,0.40), 0 2px 3px rgba(20,16,12,0.70)',
+                }}
+              >
+                <L value={cms.heroItalic} />
+              </span>
             </h1>
           </Reveal>
           <Reveal y={20} duration={1} delay={0.75}>
