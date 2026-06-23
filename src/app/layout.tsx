@@ -209,7 +209,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html
       lang={initialLocale}
-      style={{ "--gallery-tile-bg": galleryTileBg } as React.CSSProperties}
+      style={{ ["--gallery-tile-bg" as any]: galleryTileBg } as React.CSSProperties}
       translate="no"
       className={`${cormorant.variable} ${jost.variable} ${notoThai.variable} ${notoThaiSans.variable} notranslate`}
     >
