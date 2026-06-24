@@ -73,15 +73,15 @@ export default async function HomePage() {
           <div className="h-20 lg:h-24" aria-hidden="true" />
           <Reveal y={20} duration={1} delay={0.75}>
             <div className="mt-12 lg:mt-16 inline-block">
-              <div className="relative flex items-center justify-center gap-4 lg:gap-5 mb-7 px-6 py-2 rounded-full sm:rounded-none sm:px-0 sm:py-0 border border-gold-light/35 sm:border-0 bg-transparent sm:bg-transparent">
-                <span className="hidden sm:block h-px w-12 lg:w-16 bg-gold-light/70" />
-                <span
-                  className="font-sans text-[10.5px] uppercase tracking-[0.48em] text-gold-light whitespace-nowrap"
-                  style={{ textShadow: '0 1px 10px rgba(0,0,0,0.7)' }}
-                >
+              <div
+                className="relative inline-flex items-center justify-center gap-4 lg:gap-5 mb-7 px-6 lg:px-7 py-2.5 rounded-full bg-ivory/95 backdrop-blur-sm"
+                style={{ boxShadow: '0 10px 28px -14px rgba(20,16,12,0.5)' }}
+              >
+                <span className="hidden sm:block h-px w-10 lg:w-14 bg-charcoal/30" />
+                <span className="font-sans text-[10.5px] font-medium uppercase tracking-[0.48em] text-charcoal whitespace-nowrap">
                   <L value={cms.ctaPlateEyebrow} />
                 </span>
-                <span className="hidden sm:block h-px w-12 lg:w-16 bg-gold-light/70" />
+                <span className="hidden sm:block h-px w-10 lg:w-14 bg-charcoal/30" />
               </div>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-10 w-full sm:w-auto">
