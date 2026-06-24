@@ -74,14 +74,17 @@ export default async function HomePage() {
           <Reveal y={20} duration={1} delay={0.75}>
             <div className="mt-12 lg:mt-16 inline-block">
               <div
-                className="relative inline-flex items-center justify-center gap-4 lg:gap-5 mb-7 px-6 lg:px-7 py-2.5 rounded-full bg-ivory/95 backdrop-blur-sm"
-                style={{ boxShadow: '0 10px 28px -14px rgba(20,16,12,0.5)' }}
+                className="relative inline-flex items-center justify-center gap-4 lg:gap-5 mb-7 px-6 lg:px-7 py-2.5 rounded-full bg-ivory backdrop-blur-md"
+                style={{
+                  boxShadow:
+                    '0 4px 24px -8px rgba(20,16,12,0.45), 0 0 0 1px rgba(20,16,12,0.10)',
+                }}
               >
-                <span className="hidden sm:block h-px w-10 lg:w-14 bg-charcoal/30" />
-                <span className="font-sans text-[10.5px] font-medium uppercase tracking-[0.48em] text-charcoal whitespace-nowrap">
+                <span className="hidden sm:block h-px w-10 lg:w-14 bg-charcoal/35" />
+                <span className="font-sans text-[10.5px] font-semibold uppercase tracking-[0.48em] text-charcoal whitespace-nowrap">
                   <L value={cms.ctaPlateEyebrow} />
                 </span>
-                <span className="hidden sm:block h-px w-10 lg:w-14 bg-charcoal/30" />
+                <span className="hidden sm:block h-px w-10 lg:w-14 bg-charcoal/35" />
               </div>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-10 w-full sm:w-auto">
